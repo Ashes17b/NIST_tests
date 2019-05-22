@@ -1,10 +1,35 @@
+#pragma once
+
 #include <iostream>
-#include <typeinfo>
+#include <fstream>
 #include <vector>
-#include <tuple>
 #include <cmath>
 
 namespace runs_test {
+
+    void run(std::string filename) 
+    {
+        std::ifstream f(filename, std::ios::binary | std::ios::in);
+
+        if (!f.is_open())
+        {
+            std::cerr << "Could NOT find " + filename << std::endl;
+            return;
+        }
+
+        std::vector<int8_t> buffer;
+
+        char c;
+        while (f.get(c))
+            for (int i = 7; i >= 0; --i)
+                buffer.push_back((((c >> i) & 1) * 2) - 1);
+
+        f.close();
+
+        std::cout << filename + ": ";
+        printf("P-value runs_test: %.8f\n", runs_test::test(buffer));
+        std::cout << std::endl;
+    }
 
     /**
      * Compute the pre-test proportion pi of ones in the input sequence
@@ -16,8 +41,7 @@ namespace runs_test {
      * Since bits = 1001101011, then
      *                 V_{ n }(obs) = ( 1 + 0 + 1 + 0 + 1 + 1 + 1 + 1 + 0 ) + 1 = 7.
     */
-    template <typename Container>
-    std::tuple<double, uint64_t> count_v_and_ones( const Container &bits )
+    std::pair<double, uint64_t> count_v_and_ones( const std::vector<uint8_t> &bits )
     {
         uint64_t v = 0;
         double countOnes = 0;
@@ -44,8 +68,7 @@ namespace runs_test {
      * 
      * Since the observed value pi is within the selected bounds, the runs test is applicable.
     */
-    template <typename Container>
-    double test( const Container &bits ) 
+    double test( const std::vector<uint8_t> &bits ) 
     {
         uint64_t n = bits.size();
         double tau = 2 / sqrt( n );

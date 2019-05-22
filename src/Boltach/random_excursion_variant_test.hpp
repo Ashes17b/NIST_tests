@@ -1,12 +1,37 @@
+#pragma once
+
 #include <iostream>
+#include <fstream>
 #include <vector>
-#include <tuple>
 #include <cmath>
 
 namespace random_excursion_variant_test {
 
-    template <typename Container>
-    std::tuple< uint64_t, std::vector<int64_t> > build_the_partial_sum_and_J( const Container &bits )
+    void run(const std::string filename)
+    {
+        std::ifstream f(filename, std::ios::binary | std::ios::in);
+
+        if (!f.is_open())
+        {
+            std::cerr << "Could NOT find " + filename << std::endl;
+            return;
+        }
+
+        std::vector<int8_t> buffer;
+
+        char c;
+        while (f.get(c))
+            for (int i = 7; i >= 0; --i)
+                buffer.push_back(((c >> i) & 1));
+
+        f.close();
+
+        std::cout << filename + ": ";
+        printf("P-value random_excursion_variant_test: %.8f\n", random_excursion_variant_test::test(buffer));
+        std::cout << std::endl;
+    }
+
+    std::pair< uint64_t, std::vector<int64_t> > build_the_partial_sum_and_J( const std::vector<uint8_t> &bits )
     {
         std::vector<int64_t> count(19, 0);
         int64_t sum = 0;
@@ -29,8 +54,7 @@ namespace random_excursion_variant_test {
         return { J, count };
     }
 
-    template< typename Container>
-    double test( const Container &bits )
+    double test( const std::vector<uint8_t> &bits )
     {
         const auto &[J, count] = build_the_partial_sum_and_J( bits );
 
