@@ -1,81 +1,30 @@
-#include <fstream>
-#include <ctime>
+#include "runs_test_boltach.hpp"
+// #include "random_excursion_variant_test.hpp"
 
-#include "runs_test.hpp"
-#include "random_excursion_variant_test.hpp"
-
-void test1( const std::string filename ) 
-{
-    std::ifstream f(filename, std::ios::binary | std::ios::in);
-
-    if ( !f.is_open() )
-    {
-        std::cout << "Could NOT find " + filename << std::endl;
-        return;
-    }
-
-    clock_t tStart = clock();
-
-    std::vector<int8_t> buffer;
-    char c;
-    while ( f.get(c) ) 
-        for ( int i = 7; i >= 0; --i ) 
-            buffer.push_back((((c >> i) & 1) * 2) - 1);
-    
-    f.close();
-
-    std::cout << filename + ": ";
-    printf( "P-value runs_test: %.8f\n", runs_test::test( buffer ) );
-    printf( "Time taken: %.4fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC );
-    std::cout << std::endl;
-}
-
-void test2(const std::string filename)
-{
-    std::ifstream f(filename, std::ios::binary | std::ios::in);
-
-    if (!f.is_open())
-    {
-        std::cout << "Could NOT find " + filename << std::endl;
-        return;
-    }
-
-    clock_t tStart = clock();
-
-    std::vector<int8_t> buffer;
-
-    char c;
-    while (f.get(c))
-        for (int i = 7; i >= 0; --i)
-            buffer.push_back(((c >> i) & 1));
-
-    f.close();
-
-    std::cout << filename + ": ";
-    printf( "P-value random_excursion_variant_test: %.8f\n", random_excursion_variant_test::test( buffer ) );
-    printf("Time taken: %.4fs\n", (double)(clock() - tStart) / CLOCKS_PER_SEC);
-    std::cout << std::endl;
-}
+using namespace runs_test;
 
 int main()
 {
-    test1( "../seq/seq1.bin" );
-    test1( "../seq/seq2.bin" );
-    test1( "../seq/seq3.bin" );
-    test1( "../seq/seq4.bin" );
-    test1( "../seq/seq5.bin" );
-    test1( "../seq/seq6.bin" );
-    test1( "../seq/seq7.bin" );
-    test1( "../seq/seq8.bin" );
+    Runs_test_boltach r_test("../seq/seq3.bin");
 
-    test2("../seq/seq1.bin");
-    test2("../seq/seq2.bin");
-    test2("../seq/seq3.bin");
-    test2("../seq/seq4.bin");
-    test2("../seq/seq5.bin");
-    test2("../seq/seq6.bin");
-    test2("../seq/seq7.bin");
-    test2("../seq/seq8.bin");
+    auto t1 = std::chrono::high_resolution_clock::now();
+    r_test.read();
+    auto t2 = std::chrono::high_resolution_clock::now();
+
+    auto duration_read = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
+    printf("Time spent on read(seconds): %.8f\n", duration_read);
+
+    t1 = std::chrono::high_resolution_clock::now();
+    auto p_value = r_test.run_test();
+    t2 = std::chrono::high_resolution_clock::now();
+    auto duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
+    printf("Time spent on task(seconds): %.8f\n", duration_task);
+
+    printf("Time spent on everything(seconds): %.8f\n", duration_read + duration_task);
+
+    printf("\nP-value runs_test: %.8f\n", p_value);
+
+    // random_excursion_variant_test::run("../seq/seq1.bin");
 
     return 0;
 }

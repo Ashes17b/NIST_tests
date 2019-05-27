@@ -6,7 +6,7 @@
 namespace random_excursion_variant_test {
 
     template <typename Container>
-    std::tuple< uint64_t, std::vector<int64_t> > build_the_partial_sum_and_J( const Container &bits )
+    std::pair< uint64_t, std::vector<int64_t> > build_the_partial_sum_and_J( const Container &bits )
     {
         std::vector<int64_t> count(19, 0);
         int64_t sum = 0;
@@ -64,5 +64,31 @@ namespace random_excursion_variant_test {
 
         return min_p_value;
     }
+
+    void run(const std::string filename)
+    {
+        std::ifstream f(filename, std::ios::binary | std::ios::in);
+
+        if (!f.is_open())
+        {
+            std::cerr << "Could NOT find " + filename << std::endl;
+            return;
+        }
+
+        std::vector<uint8_t> buffer;
+
+        char c;
+        while (f.get(c))
+            for (int i = 7; i >= 0; --i)
+                buffer.push_back(((c >> i) & 1));
+
+        f.close();
+
+        std::cout << filename + ": ";
+        printf("P-value random_excursion_variant_test: %.8f\n", test(buffer));
+        std::cout << std::endl;
+    }
+
+    
 
 } //namespace random_excursion_variant_test
