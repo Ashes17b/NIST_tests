@@ -32,15 +32,15 @@ namespace runs_test {
 
         auto n = _buffer.size();
         double tau = 2 / sqrt(_buffer.size());
-        auto [pi, v] = count_v_and_ones();
+        std::pair<double, double> pi_v = count_v_and_ones();
 
-        if (std::fabs(pi - 0.5) >= tau)
+        if (std::fabs(pi_v.first - 0.5) >= tau)
         {
             std::cerr << "|pi - 0.5| >= tau => the test is not run" << std::endl;
             return 0.0;
         }
 
-        return erfc((std::fabs(v - 2.0 * n * pi * (1.0 - pi))) / (2.0 * sqrt(2.0 * n) * pi * (1.0 - pi)));
+        return erfc((std::fabs(pi_v.second - 2.0 * n * pi_v.first * (1.0 - pi_v.first))) / (2.0 * sqrt(2.0 * n) * pi_v.first * (1.0 - pi_v.first)));
     }
 
     std::pair<double, uint64_t> Runs_test_boltach::count_v_and_ones() const {
@@ -55,7 +55,7 @@ namespace runs_test {
                 ++countOnes;
         }
 
-        return { countOnes / _buffer.size(), v + 1 };
+        return std::make_pair(countOnes / _buffer.size(), v + 1);
     }
 
 } //namespace runs_test
