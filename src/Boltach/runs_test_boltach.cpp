@@ -34,8 +34,7 @@ namespace runs_test {
         double tau = 2 / sqrt(_buffer.size());
         std::pair<double, double> pi_v = count_v_and_ones();
 
-        if (std::fabs(pi_v.first - 0.5) >= tau)
-        {
+        if (std::fabs(pi_v.first - 0.5) >= tau) {
             std::cerr << "|pi - 0.5| >= tau => the test is not run" << std::endl;
             return 0.0;
         }
@@ -47,8 +46,7 @@ namespace runs_test {
         uint64_t v = 0;
         double countOnes = 0;
 
-        for (std::size_t i = 0; i < _buffer.size(); ++i)
-        {
+        for (std::size_t i = 0; i < _buffer.size(); ++i) {
             if (_buffer[i] != _buffer[i + 1] && i < _buffer.size() - 1)
                 ++v;
             if (_buffer[i] == 1)
