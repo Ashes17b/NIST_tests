@@ -44,6 +44,8 @@ namespace runs_test {
         */
         std::pair<double, uint64_t> count_v_and_ones() const;
 
+        std::size_t get_size_file(std::string filename) const;
+
         bytes _buffer;
     };  
 

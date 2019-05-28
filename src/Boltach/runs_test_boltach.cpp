@@ -2,26 +2,26 @@
 
 namespace runs_test {
 
-    void Runs_test_boltach::read(std::string filename /* = "" */) {
+    void Runs_test_boltach::read(std::string filename /* = "" */)
+    {
         if (filename.empty())
             std::cerr << "Filename is undefined" << std::endl;
-        else 
+        else
             std::cout << "Read from(Runs_test Boltach) " << filename << std::endl;
-        
+
         std::ifstream f(filename, std::ios::binary | std::ios::in);
 
         if (!f.is_open()) {
             std::cerr << "Could NOT find " + filename << std::endl;
             return;
         }
-    
-        std::size_t size = f.tellg();
-        _buffer.reserve(size);
+
+        _buffer.reserve(get_size_file(filename));
 
         char c;
-        while (f.get(c)) 
-            for (int j = 7; j >= 0; --j)
-                _buffer.emplace_back((((c >> j) & 1) * 2) - 1);
+        while (f.get(c))
+            for (int i = 7; i >= 0; --i)
+                _buffer.push_back((c >> i) & 1);
 
         f.close();
     }
@@ -54,6 +54,11 @@ namespace runs_test {
         }
 
         return std::make_pair(countOnes / _buffer.size(), v + 1);
+    }
+
+    std::size_t Runs_test_boltach::get_size_file(std::string filename) const {
+        std::ifstream f(filename, std::ios::binary | std::ios::in | std::ifstream::ate);
+        return f.tellg();
     }
 
 } //namespace runs_test

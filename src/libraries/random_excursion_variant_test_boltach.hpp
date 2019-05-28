@@ -4,7 +4,7 @@
 
 namespace random_excursion_variant_test {
 
-    using bytes = std::vector<uint8_t>;
+    using bytes = std::vector<int8_t>;
 
     class Random_excursion_variant_test_boltach : public Random_excursion_variant_test
     {
@@ -22,6 +22,8 @@ namespace random_excursion_variant_test {
 
     private:
         std::pair<uint64_t, std::vector<int64_t> > build_the_partial_sum_and_J() const;
+
+        std::size_t get_size_file(std::string filename) const;
 
         bytes _buffer;
     };

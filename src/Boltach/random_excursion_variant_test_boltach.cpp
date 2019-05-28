@@ -6,7 +6,7 @@ namespace random_excursion_variant_test {
         if (filename.empty())
             std::cerr << "Filename is undefined" << std::endl;
         else
-            std::cout << "Read from(Runs_test Boltach) " << filename << std::endl;
+            std::cout << "Read from(Random_excursion_variant_test_boltach Boltach) " << filename << std::endl;
 
         std::ifstream f(filename, std::ios::binary | std::ios::in);
 
@@ -15,19 +15,18 @@ namespace random_excursion_variant_test {
             return;
         }
 
-        std::size_t size = f.tellg();
-        _buffer.reserve(size);
+        _buffer.reserve(get_size_file(filename));
 
         char c;
         while (f.get(c))
-            for (int j = 7; j >= 0; --j)
-                _buffer.emplace_back(((c >> j) & 1));
+            for (int i = 7; i >= 0; --i)
+                _buffer.push_back((((c >> i) & 1) * 2) - 1);
 
         f.close();
     }
 
     double Random_excursion_variant_test_boltach::run_test() const {
-        std::cout << "Started performing runs_test Boltach" << std::endl;
+        std::cout << "Started performing random_excursion_variant_test_boltach Boltach" << std::endl;
         assert(!_buffer.empty());
 
         const std::pair<uint64_t, std::vector<int64_t> > &J_count = build_the_partial_sum_and_J();
@@ -66,8 +65,7 @@ namespace random_excursion_variant_test {
         int64_t sum = 0;
         uint64_t J = 0;
 
-        for (size_t i = 0; i < _buffer.size(); ++i)
-        {
+        for (size_t i = 0; i < _buffer.size(); ++i) {
             sum += _buffer[i];
 
             if (sum == 0)
@@ -81,6 +79,11 @@ namespace random_excursion_variant_test {
         count[0] += 2;
 
         return std::make_pair(J, count);
-        }
+    }
+
+    std::size_t Random_excursion_variant_test_boltach::get_size_file(std::string filename) const {
+        std::ifstream f(filename, std::ios::binary | std::ios::in | std::ifstream::ate);
+        return f.tellg();
+    }
 
 } //namespace random_excursion_variant_test
