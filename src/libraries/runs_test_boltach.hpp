@@ -8,19 +8,15 @@ namespace runs_test {
 
     class Runs_test_boltach : public Runs_test
     {
-        private:
-            std::string _filename;
-        
         public:
-            Runs_test_boltach() = delete;
-            Runs_test_boltach(std::string filename) : _filename(filename) {}
+            Runs_test_boltach() = default;
             Runs_test_boltach(const Runs_test_boltach &runs_test_boltach) = default;
             Runs_test_boltach(Runs_test_boltach &&runs_test_boltach) = default;
             Runs_test_boltach& operator=(const Runs_test_boltach &runs_test_boltach) = default;
             Runs_test_boltach& operator=(Runs_test_boltach &&runs_test_boltach) = default;
             ~Runs_test_boltach() = default;
 
-            void read() override;
+            void read(std::string filename = "") override;
 
             /**
              * Determine if the prerequisite Frequency test is passed: If it can be shown that |pi - 0.5| >= tau, then the

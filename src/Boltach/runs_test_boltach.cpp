@@ -1,12 +1,17 @@
-#include "runs_test_boltach.hpp"
+#include "../libraries/runs_test_boltach.hpp"
 
 namespace runs_test {
 
-    void Runs_test_boltach::read() {
-        std::ifstream f(_filename, std::ios::binary | std::ios::in);
+    void Runs_test_boltach::read(std::string filename /* = "" */) {
+        if (filename.empty())
+            std::cerr << "Filename is undefined" << std::endl;
+        else 
+            std::cout << "Read from(Runs_test Boltach) " << filename << std::endl;
+        
+        std::ifstream f(filename, std::ios::binary | std::ios::in);
 
         if (!f.is_open()) {
-            std::cerr << "Could NOT find " + _filename << std::endl;
+            std::cerr << "Could NOT find " + filename << std::endl;
             return;
         }
     
@@ -22,6 +27,7 @@ namespace runs_test {
     }
 
     double Runs_test_boltach::run_test() const {
+        std::cout << "Started performing runs_test Boltach" << std::endl;
         assert(!_buffer.empty());
 
         auto n = _buffer.size();
@@ -38,8 +44,6 @@ namespace runs_test {
     }
 
     std::pair<double, uint64_t> Runs_test_boltach::count_v_and_ones() const {
-        assert(!_buffer.empty());
-
         uint64_t v = 0;
         double countOnes = 0;
 
@@ -51,7 +55,7 @@ namespace runs_test {
                 ++countOnes;
         }
 
-        return {countOnes / _buffer.size(), v + 1};
+        return { countOnes / _buffer.size(), v + 1 };
     }
 
 } //namespace runs_test
