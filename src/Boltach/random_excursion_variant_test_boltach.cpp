@@ -15,7 +15,7 @@ namespace random_excursion_variant_test {
             return;
         }
 
-        _buffer.reserve(get_size_file(filename));
+        _buffer.reserve(get_size_file(filename)*8);
 
         char c;
         while (f.get(c))
@@ -26,7 +26,7 @@ namespace random_excursion_variant_test {
     }
 
     double Random_excursion_variant_test_boltach::run_test() const {
-        std::cout << "Started performing random_excursion_variant_test_boltach Boltach" << std::endl;
+        std::cout << "Started performing random_excursion_variant_test Boltach" << std::endl;
         assert(!_buffer.empty());
 
         const std::pair<uint64_t, std::vector<int64_t> > &J_count = build_the_partial_sum_and_J();

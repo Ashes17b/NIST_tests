@@ -16,7 +16,7 @@ set(${PROJECT_NAME}_SRC
    ${SRC_PATH}/Lisai/serial_test_lisai.cpp
    ${SRC_PATH}/Lisai/spectral_test_lisai.cpp
    ${SRC_PATH}/Zakrevsky/serial_test_zakrevsky.cpp
-
+   ${SRC_PATH}/Vecherko/non_overlapping_template_matching_test_vecherko.cpp
 )
 
 find_package(Boost 1.65.0)

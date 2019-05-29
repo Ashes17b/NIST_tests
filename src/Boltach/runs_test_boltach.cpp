@@ -16,7 +16,7 @@ namespace runs_test {
             return;
         }
 
-        _buffer.reserve(get_size_file(filename));
+        _buffer.reserve(get_size_file(filename)*8);
 
         char c;
         while (f.get(c))

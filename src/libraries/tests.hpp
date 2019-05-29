@@ -5,3 +5,4 @@
 #include "serial_test_lisai.hpp"
 #include "serial_test_zakrevsky.hpp"
 #include "spectral_test_lisai.hpp"
+#include "non_overlapping_template_matching_test_vecherko.hpp"
