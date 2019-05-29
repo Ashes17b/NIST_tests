@@ -108,9 +108,7 @@ void dittt(double * data1, int TRSIZ)
                 tempi = wr*data[j+1] + wi*data[j];
                 data[j] = tempr;
                 data[j+1] = tempi;
-                // printf("\ni = %d ,j = %d, m = %d, wr = %f , wi = %f",(i-1)/2,(j-1)/2,m,wr,wi);
             }
-            // printf("\nm = %d ,istep = %d, mmax = %d, wr = %f , wi = %f, Z = %f",m,istep,mmax,wr,wi,atan(wi/wr)/(6.28318530717959/(1.0*n/2)));
             wtemp = wr;
             wr += wtemp*wpr - wi*wpi;
             wi += wtemp*wpi + wi*wpr;
@@ -131,10 +129,6 @@ void dittt(double * data1, int TRSIZ)
         }
         j +=m;
     }
-    // print the results
-    // printf("\nFourier components from the DIF algorithm:");
-    // for (k = 0; k < 2*N; k +=2 )
-    // printf("\n%f%f", data[k+1], data[k+2]);
 } // end of diftt()
 
 void read_file(double * array, int n, string filename) {
@@ -143,6 +137,7 @@ void read_file(double * array, int n, string filename) {
     int i = 0;
     int count = 0;
     while (f.get(c)){
+
         for ( auto j = 7; j >= 0; --j ) {
             array[i] = (((c >> j) & 1) * 2 - 1);
             array[i + 1] = 0;
@@ -200,9 +195,7 @@ double test_result(double * X, int n) {
 }
 
 int main() {
-    // dittt();
-
-    string filename = "../seq/seq1.bin";
+    string filename = "../../seq/seq6.bin";
     cout << "File name : " << filename << endl;
     int i = 0, n = 0, n_ = 1;
     n = get_file_size(filename); // how much bytes in file
@@ -212,8 +205,12 @@ int main() {
     bool powerOfTwo = !(n == 0) && !(n & (n - 1));
     if (!(n == 0) && !(n & (n - 1))) {
         n_ = n;
+            printf("Yes");
+
     }
     else {
+            printf("No");
+
         while(n_ * 2 < n){
             n_ *= 2;
         }
@@ -234,13 +231,13 @@ int main() {
     printf("Time taken: %.2fs\n", (double)(clock() - t_start) / CLOCKS_PER_SEC);
     printf("Start DFT\n");
     t_start = clock();
-    // dittt1(complex_bits_array, n_);
+    dittt1(complex_bits_array, n_);
     for (int i = 0; i < 32; i+=2) {
         cout << complex_bits_array[i] << " "  << complex_bits_array[i + 1] << endl;
     }
     printf("Time taken: %.2fs\n", (double)(clock() - t_start) / CLOCKS_PER_SEC);
 
-    // test_result(complex_bits_array, n_);
+    test_result(complex_bits_array, n_);
 
     delete [] complex_bits_array;
     return 0;

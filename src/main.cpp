@@ -3,6 +3,8 @@
 using namespace runs_test;
 using namespace random_excursion_variant_test;
 using namespace random_excursions_test;
+using namespace serial_test;
+using namespace spectral_test;
 
 int main()
 {
@@ -54,7 +56,6 @@ int main()
 
     t1 = std::chrono::high_resolution_clock::now();
     r_test_timoshenko.read("../seq/seq7.bin");
-    t2 = std::chrono::high_resolution_clock::now();
 
     duration_read = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
     printf("Time spent on read(seconds): %.8f\n", duration_read);
@@ -92,6 +93,64 @@ int main()
 
     std::cout << "----------------------------------------------------------------------" << std::endl;
     
+    Serial_test_lisai serial_test_lisai;
+
+    t1 = std::chrono::high_resolution_clock::now();
+    serial_test_lisai.read("../seq/seq7.bin");
+    t2 = std::chrono::high_resolution_clock::now();
+    
+    duration_read = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
+    printf("Time spent on read(seconds): %.8f\n", duration_read);
+
+    t1 = std::chrono::high_resolution_clock::now();
+    auto p_value_for_serial = serial_test_lisai.run_test();
+    t2 = std::chrono::high_resolution_clock::now();
+    duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
+    printf("Time spent on task(seconds): %.8f\n", duration_task);
+
+    printf("Time spent on everything(seconds): %.8f\n", duration_read + duration_task);
+
+    printf("\nP-value serial_test: %.8f %.8f\n", p_value_for_serial.first, p_value_for_serial.second);
+
+    std::cout << "----------------------------------------------------------------------" << std::endl;
+
+    Spectral_test_lisai spectral_test_lisai;
+
+    t1 = std::chrono::high_resolution_clock::now();
+    spectral_test_lisai.read("../seq/seq7.bin");
+    t2 = std::chrono::high_resolution_clock::now();
+
+    t1 = std::chrono::high_resolution_clock::now();
+    p_value  = spectral_test_lisai.run_test();
+    t2 = std::chrono::high_resolution_clock::now();
+    duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
+    printf("Time spent on task(seconds): %.8f\n", duration_task);
+
+    printf("Time spent on everything(seconds): %.8f\n", duration_read + duration_task);
+
+    printf("\nP-value spectral_test: %.8f\n", p_value);
+
+    std::cout << "----------------------------------------------------------------------" << std::endl;
+
+    Serial_test_zakrevsky serial_test_zakrevsky;
+
+    t1 = std::chrono::high_resolution_clock::now();
+    serial_test_zakrevsky.read("../../seq/seq7.bin");
+    t2 = std::chrono::high_resolution_clock::now();
+
+    duration_read = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
+    printf("Time spent on read(seconds): %.8f\n", duration_read);
+
+    t1 = std::chrono::high_resolution_clock::now();
+    p_value_for_serial = serial_test_zakrevsky.run_test();
+    t2 = std::chrono::high_resolution_clock::now();
+    duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
+    printf("Time spent on task(seconds): %.8f\n", duration_task);
+
+    printf("Time spent on everything(seconds): %.8f\n", duration_read + duration_task);
+
+    printf("\nP-value serial_test: %.8f %.8f\n", p_value_for_serial.first, p_value_for_serial.second);
 
     return 0;
+
 }

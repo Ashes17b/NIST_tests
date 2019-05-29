@@ -1,10 +1,11 @@
-#include <boost/math/special_functions/gamma.hpp>
 #include <iostream>
+#include <boost/math/special_functions/gamma.hpp>
 #include <fstream>
+#include <cmath>
 
 
 using namespace std;
-const int r = 2;//до 23-24
+const int r = 2;//РґРѕ 23-24
 const int k = pow(2, r);
 
 
@@ -42,9 +43,9 @@ void counter(char* buf, int m, int* temp, int n, int w) {
 
 
 int main() {
-	ifstream in("D:\\Downloads\\Visual Studio 2015\\Projects\\Lab_Test7\\seq7.bin", ios::binary);
-	in.seekg(0, ios::end); // если курсор в начале файла, перемещаем курсор в конец файла.
-	int n = in.tellg(); // функция выдаст конечное положнние курсора относительно начала файла в байтах.
+	ifstream in("../../seq/seq3.bin", ios::binary);
+	in.seekg(0, ios::end); // РµСЃР»Рё РєСѓСЂСЃРѕСЂ РІ РЅР°С‡Р°Р»Рµ С„Р°Р№Р»Р°, РїРµСЂРµРјРµС‰Р°РµРј РєСѓСЂСЃРѕСЂ РІ РєРѕРЅРµС† С„Р°Р№Р»Р°.
+	int n = in.tellg(); // С„СѓРЅРєС†РёСЏ РІС‹РґР°СЃС‚ РєРѕРЅРµС‡РЅРѕРµ РїРѕР»РѕР¶РЅРЅРёРµ РєСѓСЂСЃРѕСЂР° РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ РЅР°С‡Р°Р»Р° С„Р°Р№Р»Р° РІ Р±Р°Р№С‚Р°С….
 	in.seekg(0, ios::beg);
 	int w = ceil((r - 1) / 8);
 	char * buf = new char[n + w];
@@ -55,11 +56,11 @@ int main() {
 	}
 	n *= 8;
 
-	int * masM = new int[pow(2, r)];
-	int * masM_1 = new int[pow(2, r - 1)];
-	int * masM_2 = new int[pow(2, r - 2)];
+	int * masM = new int[(int)pow(2, r)];
+	int * masM_1 = new int[(int)pow(2, r - 1)];
+	int * masM_2 = new int[(int)pow(2, r - 2)];
 
-	//заполнение
+	//Р·Р°РїРѕР»РЅРµРЅРёРµ
 	for (int i = 0; i < pow(2, r); i++) {
 		masM[i] = 0;
 	}
