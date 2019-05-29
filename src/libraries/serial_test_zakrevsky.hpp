@@ -1,7 +1,7 @@
 #pragma once
 
 #include "serial_test.hpp"
-#include <boost/math/special_functions/gamma.hpp>
+#include "cephes.h"
 
 namespace serial_test {
 

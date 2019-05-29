@@ -80,8 +80,8 @@ namespace serial_test {
         delete[] masM_2;
 
         return std::make_pair(
-            boost::math::gamma_q(pow(2, r - 2), delta_m/2), 
-            boost::math::gamma_q(pow(2, r - 3), delta2_m/2)
+            cephes_igamc(pow(2, r - 2), delta_m/2), 
+            cephes_igamc(pow(2, r - 3), delta2_m/2)
             );
         // return std::make_pair(0.0, 0.0);
     }

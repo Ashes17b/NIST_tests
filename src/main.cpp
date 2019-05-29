@@ -6,6 +6,7 @@ using namespace random_excursions_test;
 using namespace serial_test;
 using namespace spectral_test;
 using namespace non_overlapping_template_matching_test;
+using namespace longest_runs_test;
 
 int main()
 {
@@ -58,6 +59,7 @@ int main()
     t1 = std::chrono::high_resolution_clock::now();
     r_test_timoshenko.read("../seq/seq7.bin");
     t2 = std::chrono::high_resolution_clock::now();
+
     duration_read = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
     printf("Time spent on read(seconds): %.8f\n", duration_read);
 
@@ -89,8 +91,49 @@ int main()
     printf("Time spent on task(seconds): %.8f\n", duration_task);
 
     printf("Time spent on everything(seconds): %.8f\n", duration_read + duration_task);
+    
+    printf("\nP-value random_excursions_test: %.8f\n", p_value);
+    std::cout << "----------------------------------------------------------------------" << std::endl;
+    
+    Random_excursions_test_bondarev r_e_test_bondarev;
+
+    t1 = std::chrono::high_resolution_clock::now();
+    r_e_test_bondarev.read("../seq/seq7.bin");
+    t2 = std::chrono::high_resolution_clock::now();
+
+    duration_read = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
+    printf("Time spent on read(seconds): %.8f\n", duration_read);
+
+    t1 = std::chrono::high_resolution_clock::now();
+    p_value = r_e_test_bondarev.run_test();
+    t2 = std::chrono::high_resolution_clock::now();
+    duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
+    printf("Time spent on task(seconds): %.8f\n", duration_task);
+
+    printf("Time spent on everything(seconds): %.8f\n", duration_read + duration_task);
 
     printf("\nP-value random_excursions_test: %.8f\n", p_value);
+
+    std::cout << "----------------------------------------------------------------------" << std::endl;
+
+    Longest_runs_test_bondarev longest_runs_test_bondarev;
+
+    t1 = std::chrono::high_resolution_clock::now();
+    longest_runs_test_bondarev.read("../seq/seq7.bin");
+    t2 = std::chrono::high_resolution_clock::now();
+
+    duration_read = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
+    printf("Time spent on read(seconds): %.8f\n", duration_read);
+
+    t1 = std::chrono::high_resolution_clock::now();
+    p_value = longest_runs_test_bondarev.run_test();
+    t2 = std::chrono::high_resolution_clock::now();
+    duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
+    printf("Time spent on task(seconds): %.8f\n", duration_task);
+
+    printf("Time spent on everything(seconds): %.8f\n", duration_read + duration_task);
+
+    printf("\nP-value longest_runs_test: %.8f\n", p_value);
 
     std::cout << "----------------------------------------------------------------------" << std::endl;
 
@@ -172,6 +215,9 @@ int main()
     printf("Time spent on everything(seconds): %.8f\n", duration_read + duration_task);
 
     printf("\nP-value serial_test: %.8f %.8f\n", p_value_for_serial.first, p_value_for_serial.second);
+
+    std::cout << "----------------------------------------------------------------------" << std::endl;
+
 
     return 0;
 
