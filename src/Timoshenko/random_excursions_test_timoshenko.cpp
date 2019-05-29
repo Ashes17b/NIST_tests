@@ -1,56 +1,53 @@
-#include <fstream>
-#include <iterator>
-#include <vector>
-#include <iostream>
-#include <typeinfo>
-#include <cmath>
-#include <ctime>
-#include <algorithm>
+#include "../libraries/random_excursions_test_timoshenko.hpp"
 
+namespace random_excursions_test {
 
-using namespace std;
+    void Random_excursions_test_timoshenko::read(std::string filename /* = "" */) {
+        if (filename.empty())
+            std::cerr << "Filename is undefined" << std::endl;
+        else
+            std::cout << "Read from(Random_excursions_test_timoshenko Timoshenko) " << filename << std::endl;
 
+        std::ifstream f(filename, std::ios::binary | std::ios::in);
 
-vector<int8_t> read_file( string filename )
-{
-    ifstream f(filename, ios::binary | ios::in);
-    char c;
-    vector<int8_t> bits;
+        if (!f.is_open()) {
+            std::cerr << "Could NOT find " + filename << std::endl;
+            return;
+        }
 
-    while (f.get(c)){
-        for ( auto i = 7; i >= 0; --i ) 
-            bits.push_back(((c >> i) & 1));
+        _buffer.reserve(get_size_file(filename));
+
+        char c;
+        while (f.get(c))
+            for (int i = 7; i >= 0; --i)
+                _buffer.emplace_back(((c >> i) & 1));
+
+        f.close();
     }
-    f.close();
 
-    return bits;
-}
+    double Random_excursions_test_timoshenko::run_test() const {
+        std::cout << "Started performing random_excursions_test Timoshenko" << std::endl;
+        assert(!_buffer.empty());
 
-
-double random_excursions_test ( const vector<int8_t> &bits )
-{    
-    try {
-        vector<int> sums;
-        vector<int> cycle;
+        std::vector<int> sums;
+        std::vector<int> cycle;
         int pos = 0;
         int J = 0;
         
-        clock_t t_start = clock();
-        for ( int i = 0; i < bits.size(); i++ ) {
-            pos += (bits[i] * 2 - 1);
+        for ( int i = 0; i < _buffer.size(); i++ ) {
+            pos += (_buffer[i] * 2 - 1);
             sums.push_back(pos);
             if ( pos == 0 ) {
                 J++;
                 cycle.push_back(i);
             }
         }
-        if ( sums[bits.size() - 1] != 0 )
+        if ( sums[_buffer.size() - 1] != 0 )
             J++;
 
-        cycle.push_back(bits.size());
+        cycle.push_back(_buffer.size());
         
-        printf("Time taken: %.2fs\n", (double)(clock() - t_start) / CLOCKS_PER_SEC);
-        cout << "J=" << J << endl;
+        // cout << "J=" << J << endl;
 
         double nu[6][8];
         int	stateX[8] = { -4, -3, -2, -1, 1, 2, 3, 4 };
@@ -66,8 +63,8 @@ double random_excursions_test ( const vector<int8_t> &bits )
             {0.9286, 0.0051, 0.0047, 0.0044, 0.0041, 0.0531}};
         double p_value;
 
-        if ( J < max(500., 0.005 * sqrt(bits.size())) ) 
-            cout << "THERE ARE AN INSUFFICIENT NUMBER OF CYCLES. The randomness hypothesis is rejected." << endl;
+        if ( J < fmax(500., 0.005 * sqrt(_buffer.size())) ) 
+            std::cerr << "THERE ARE AN INSUFFICIENT NUMBER OF CYCLES. The randomness hypothesis is rejected." << std::endl;
         else {
             int cycle_start = 0;
             int cycle_stop = cycle[1];
@@ -112,50 +109,24 @@ double random_excursions_test ( const vector<int8_t> &bits )
                     double gamma1_5 = (gamma0_5 * 0.5 + pow(chisq / 2.0, 0.5) * exp(-chisq / 2.0)) / tgamma(1.5);
                     p_value = (gamma1_5 * 1.5 + pow(chisq / 2.0, 1.5) * exp(-chisq / 2.0)) / tgamma(2.5);
 
-                    cout << x <<" : chisq = " << chisq <<" : p_value = " << p_value << endl;
+                    // cout << x <<" : chisq = " << chisq <<" : p_value = " << p_value << endl;
                     if (i == 0)
                         min_p_value = p_value;
                     else
                         min_p_value = p_value < min_p_value ? p_value : min_p_value;
                 }
         }
-        if ( min_p_value < 0.01 )
-            cout << "Sequence is non-random." << endl;
-        else 
-            cout << "Sequence is random." << endl;
+        // if ( min_p_value < 0.01 )
+        //     cout << "Sequence is non-random." << endl;
+        // else 
+        //     cout << "Sequence is random." << endl;
         
-
         return min_p_value;
     }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
+
+    std::size_t Random_excursions_test_timoshenko::get_size_file(std::string filename) const {
+        std::ifstream f(filename, std::ios::binary | std::ios::in | std::ifstream::ate);
+        return f.tellg();
     }
 
-    return 0;
-}
-
-
-int main()
-{
-    for ( int i = 1; i < 9; i++ ) {
-        string filename ="seq/seq" + to_string(i) + ".bin";
-        vector<int8_t> bits = read_file(filename);
-        cout << "\nSeq " << i << endl;
-        cout << "Random excursions test" << endl;
-        cout << "p_value: " << random_excursions_test(bits) << endl;
-    }
-
-    // vector<int8_t> bits = read_file("seq/seq8.bin");
-    // random_excursions_test(bits);
-
-    // int count = 0;
-    // for (const auto &i: bits ) {
-    //     cout << (int)i;
-    //     if ( count > 100 )
-    //         break;
-    //     count++;
-    // }
-    // cout << endl;
-    return 0;
-}
+} //namespace random_excursions_test
