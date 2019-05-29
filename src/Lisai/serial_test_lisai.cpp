@@ -68,7 +68,7 @@ namespace serial_test {
         // read first m bit:
         int i = 0, j = 0;
         int how_much_bits_is_counted = 0;
-        for ( i; i < n && how_much_bits_is_counted < m; i ++ ) {
+        for ( ; i < n && how_much_bits_is_counted < m; i++ ) {
             for ( j = 7; j >= 0 && how_much_bits_is_counted < m; --j, how_much_bits_is_counted ++ ) {
                 bit = ((epsilon[i] >> j) & 1);
                 k += (bit & 1) * pow(2, m - how_much_bits_is_counted - 1);

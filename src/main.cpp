@@ -135,7 +135,7 @@ int main()
     Serial_test_zakrevsky serial_test_zakrevsky;
 
     t1 = std::chrono::high_resolution_clock::now();
-    serial_test_zakrevsky.read("../../seq/seq7.bin");
+    serial_test_zakrevsky.read("../seq/seq7.bin");
     t2 = std::chrono::high_resolution_clock::now();
 
     duration_read = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
