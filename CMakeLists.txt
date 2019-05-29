@@ -10,6 +10,8 @@ set(${PROJECT_NAME}_SRC
    ${SRC_PATH}/main.cpp
    ${SRC_PATH}/Boltach/runs_test_boltach.cpp
    ${SRC_PATH}/Boltach/random_excursion_variant_test_boltach.cpp
+   ${SRC_PATH}/Timoshenko/random_excursions_test_timoshenko.cpp
+   ${SRC_PATH}/Timoshenko/runs_test_timoshenko.cpp
 )
 
 find_package(Boost 1.68.0)
