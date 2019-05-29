@@ -1,0 +1,13 @@
+bin/
+obj/
+RandomTest.cbp
+RandomTest.depend
+RandomTest.layout
+
+# Ignore build & Debug
+build/
+Debug/
+Build/
+debug/
+.vscode/
+
