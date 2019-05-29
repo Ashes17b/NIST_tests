@@ -29,4 +29,4 @@ namespace spectral_test {
         int numbers_of_bits;
         std::size_t get_size_file(std::string filename) const;
     };
-} //namespace runs_test
+} //namespace spectral_test

@@ -28,13 +28,11 @@ namespace serial_test {
         for (int i = 0; i < w; i++) {
             _buffer[n + i] = 0;
         }
-        // for (int i = 0; i < 10; i ++) {
-        //     std::cout << (int)_buffer[i] << std::endl;
-        // }
         numbers_of_bits = n * 8;
     }
 
     std::pair<double, double> Serial_test_zakrevsky::run_test() const {
+        std::cout << "Started performing serial_test Zakrevsky" << std::endl;
         int n = numbers_of_bits;
         int r = param_m;
         int w = ceil((r - 1) / 8);
