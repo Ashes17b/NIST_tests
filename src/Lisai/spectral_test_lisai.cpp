@@ -1,5 +1,4 @@
 #include "../libraries/spectral_test_lisai.hpp"
-#define SWAP(a,b) tempr=(a); (a)=(b); (b)=tempr
 
 namespace spectral_test {
 
@@ -42,12 +41,10 @@ namespace spectral_test {
                 count_bit += 1;
                 if (count_bit >= numbers_of_bits ) {
                     f.close();
-                    std::cout << "end of read" << std::endl;
                     return;
                 }
             }
         }
-        std::cout << "end of read" << std::endl;
         f.close();
     }
 
@@ -57,8 +54,8 @@ namespace spectral_test {
         auto n = numbers_of_bits;
         double	p_value1, p_value2, psim0, psim1, psim2, del1, del2;
         
-        dittt( n );
-        double p_value = test_result( n );
+        dittt(n);
+        double p_value = test_result(n);
 
         delete [] _buffer;
         return p_value;
@@ -71,15 +68,15 @@ namespace spectral_test {
         int N = size;
         int i = 0, j = 0, n = 0, k = 0, m = 0, isign = -1,istep,mmax;
 
-        bytes data;
+        bytes_lisai data;
         data = &_buffer[0] - 1;
         n = N*2;
         j = 1;
         // do the bit-reversal
         for (i = 1; i < n; i += 2) {
             if (j > i) {
-                SWAP(data[j], data[i]);
-                SWAP(data[j+1], data[i+1]);
+                std::swap(data[j], data[i]);
+                std::swap(data[j+1], data[i+1]);
             }
             m = n >> 1;
 
@@ -117,7 +114,7 @@ namespace spectral_test {
         }
     }
 
-    double Spectral_test_lisai::test_result( int n ) {
+    double Spectral_test_lisai::test_result(int n) {
         double * m = new double [n / 2];
         int count = 0;
         double upperBound, percentile, N_l, N_o, d, p_value;

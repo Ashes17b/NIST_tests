@@ -7,22 +7,19 @@
 #include <chrono>
 #include <cmath>
 #include <cassert>
-#include <iterator>
-#include <complex>
-#include <algorithm>
 
-namespace spectral_test {
+namespace approximate_entropy_test {
 
-    class Spectral_test {
+    class Approximate_entropy_test {
     public:
 
-        Spectral_test() = default;
+        Approximate_entropy_test() = default;
 
         virtual void read(std::string filename = "") = 0;
 
         virtual double run_test() = 0;
 
-        virtual ~Spectral_test() = default;
+        virtual ~Approximate_entropy_test() = default;
     };
 
-} // namespace spectral_test
+} // namespace approximate_entropy_test

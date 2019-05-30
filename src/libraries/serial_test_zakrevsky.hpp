@@ -1,7 +1,7 @@
 #pragma once
 
 #include "serial_test.hpp"
-#include <boost/math/special_functions/gamma.hpp>
+#include "cephes.h"
 
 namespace serial_test {
 
@@ -17,15 +17,16 @@ namespace serial_test {
         ~Serial_test_zakrevsky() = default;
 
         void read(std::string filename = "") override;
+
         std::pair<double, double> run_test() const override;
 
     private:
-
         void counter(int m, int* temp, int n, int w) const;
         std::size_t get_size_file(std::string filename) const;
+
         bytes _buffer;
         int numbers_of_bits;
         int param_m = 2;
     };  
 
-} //namespace runs_test
+} //namespace serial_test
