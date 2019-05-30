@@ -237,7 +237,7 @@ int main()
     Linear_complexity_test_vecherko l_c_test_vecherko;
 
     t1 = std::chrono::high_resolution_clock::now();
-    l_c_test_vecherko.read("../seq/seq5.bin");
+    l_c_test_vecherko.read(file_name);
     t2 = std::chrono::high_resolution_clock::now();
 
     duration_read = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
@@ -246,6 +246,7 @@ int main()
     t1 = std::chrono::high_resolution_clock::now();
     p_value = l_c_test_vecherko.run_test();
     t2 = std::chrono::high_resolution_clock::now();
+    
     duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
     printf("Time spent on task(seconds): %.8f\n", duration_task);
 
