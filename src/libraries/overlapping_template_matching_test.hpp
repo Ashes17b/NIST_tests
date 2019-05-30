@@ -7,19 +7,18 @@
 #include <vector>
 #include <chrono>
 #include <cmath>
-#include <cstdlib>
 
-namespace linear_complexity_test {
+namespace overlapping_template_matching_test { 
 
-    class Linear_complexity_test {
+    class Overlapping_template_matching_test {
     public:
-        Linear_complexity_test() = default;
+        Overlapping_template_matching_test() = default;
 
         virtual void read(std::string filename = "") = 0;
 
         virtual double run_test() const = 0;
 
-        virtual ~Linear_complexity_test() = default;
+        virtual ~Overlapping_template_matching_test() = default;
     };
 
-} // namespace linear_complexity_test
+} // namespace overlapping_template_matching_test

@@ -7,19 +7,18 @@
 #include <vector>
 #include <chrono>
 #include <cmath>
-#include <cstdlib>
 
-namespace linear_complexity_test {
+namespace cumulative_sums_test { 
 
-    class Linear_complexity_test {
+    class Cumulative_sums_test {
     public:
-        Linear_complexity_test() = default;
+        Cumulative_sums_test() = default;
 
         virtual void read(std::string filename = "") = 0;
 
         virtual double run_test() const = 0;
 
-        virtual ~Linear_complexity_test() = default;
+        virtual ~Cumulative_sums_test() = default;
     };
 
-} // namespace linear_complexity_test
+} // namespace cumulative_sums_test
