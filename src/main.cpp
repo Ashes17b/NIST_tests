@@ -12,94 +12,6 @@ int main()
 //     std::string file_name = "../seq/seq7.bin";
 
 //     std::cout << "----------------------------------------------------------------------" << std::endl;
-
-//     Random_excursions_test_timoshenko r_e_test_timoshenko;
-
-//     t1 = std::chrono::high_resolution_clock::now();
-//     r_e_test_timoshenko.read(file_name);
-//     t2 = std::chrono::high_resolution_clock::now();
-
-//     duration_read = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
-//     printf("Time spent on read(seconds): %.8f\n", duration_read);
-
-//     t1 = std::chrono::high_resolution_clock::now();
-//     p_value = r_e_test_timoshenko.run_test();
-//     t2 = std::chrono::high_resolution_clock::now();
-    
-//     duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
-//     printf("Time spent on task(seconds): %.8f\n", duration_task);
-
-//     printf("Time spent on everything(seconds): %.8f\n", duration_read + duration_task);
-    
-//     printf("\nP-value random_excursions_test: %.8f\n", p_value);
-
-//     std::cout << "----------------------------------------------------------------------" << std::endl;
-    
-//     Random_excursions_test_bondarev r_e_test_bondarev;
-
-//     t1 = std::chrono::high_resolution_clock::now();
-//     r_e_test_bondarev.read(file_name);
-//     t2 = std::chrono::high_resolution_clock::now();
-
-//     duration_read = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
-//     printf("Time spent on read(seconds): %.8f\n", duration_read);
-
-//     t1 = std::chrono::high_resolution_clock::now();
-//     p_value = r_e_test_bondarev.run_test();
-//     t2 = std::chrono::high_resolution_clock::now();
-
-//     duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
-//     printf("Time spent on task(seconds): %.8f\n", duration_task);
-
-//     printf("Time spent on everything(seconds): %.8f\n", duration_read + duration_task);
-
-//     printf("\nP-value random_excursions_test: %.8f\n", p_value);
-
-//     std::cout << "----------------------------------------------------------------------" << std::endl;
-
-//     Longest_runs_test_bondarev longest_runs_test_bondarev;
-
-//     t1 = std::chrono::high_resolution_clock::now();
-//     longest_runs_test_bondarev.read(file_name);
-//     t2 = std::chrono::high_resolution_clock::now();
-
-//     duration_read = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
-//     printf("Time spent on read(seconds): %.8f\n", duration_read);
-
-//     t1 = std::chrono::high_resolution_clock::now();
-//     p_value = longest_runs_test_bondarev.run_test();
-//     t2 = std::chrono::high_resolution_clock::now();
-
-//     duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
-//     printf("Time spent on task(seconds): %.8f\n", duration_task);
-
-//     printf("Time spent on everything(seconds): %.8f\n", duration_read + duration_task);
-
-//     printf("\nP-value longest_runs_test: %.8f\n", p_value);
-
-//     std::cout << "----------------------------------------------------------------------" << std::endl;
-
-//     Non_overlapping_template_matching_test_vecherko n_o_t_m_test_vecherko;
-
-//     t1 = std::chrono::high_resolution_clock::now();
-//     n_o_t_m_test_vecherko.read(file_name);
-//     t2 = std::chrono::high_resolution_clock::now();
-
-//     duration_read = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
-//     printf("Time spent on read(seconds): %.8f\n", duration_read);
-
-//     t1 = std::chrono::high_resolution_clock::now();
-//     p_value = n_o_t_m_test_vecherko.run_test(16);
-//     t2 = std::chrono::high_resolution_clock::now();
-
-//     duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
-//     printf("Time spent on task(seconds): %.8f\n", duration_task);
-
-//     printf("Time spent on everything(seconds): %.8f\n", duration_read + duration_task);
-
-//     printf("\nP-value non_overlapping_template_matching_test: %.8f\n", p_value);
-
-//     std::cout << "----------------------------------------------------------------------" << std::endl;
     
 //     Serial_test_lisai serial_test_lisai;
 
@@ -274,28 +186,6 @@ int main()
 
 //     std::cout << "----------------------------------------------------------------------" << std::endl;
 
-//     Non_overlapping_template_matching_test_lagunov n_o_t_m_test_lagunov;
-
-//     t1 = std::chrono::high_resolution_clock::now();
-//     n_o_t_m_test_lagunov.read(file_name);
-//     t2 = std::chrono::high_resolution_clock::now();
-
-//     duration_read = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
-//     printf("Time spent on read(seconds): %.8f\n", duration_read);
-
-//     t1 = std::chrono::high_resolution_clock::now();
-//     p_value = n_o_t_m_test_lagunov.run_test();
-//     t2 = std::chrono::high_resolution_clock::now();
-    
-//     duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
-//     printf("Time spent on task(seconds): %.8f\n", duration_task);
-
-//     printf("Time spent on everything(seconds): %.8f\n", duration_read + duration_task);
-
-//     printf("\nP-value Non_overlapping_template_matching_test: %.8f\n", p_value);
-
-//     std::cout << "----------------------------------------------------------------------" << std::endl;
-
 //     Linear_complexity_test_lagunov l_c_t_test_lagunov;
 
 //     t1 = std::chrono::high_resolution_clock::now();
@@ -382,27 +272,7 @@ int main()
 
 //     printf("\nP-value maurers_test: %.8f\n", p_value);
 
-//     std::cout << "----------------------------------------------------------------------" << std::endl;
-
-//     Non_overlapping_template_matching_test_zakrevsky n_o_t_m_test_zakrevsky;
-
-//     t1 = std::chrono::high_resolution_clock::now();
-//     n_o_t_m_test_zakrevsky.read(file_name);
-//     t2 = std::chrono::high_resolution_clock::now();
-
-//     duration_read = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
-//     printf("Time spent on read(seconds): %.8f\n", duration_read);
-
-//     t1 = std::chrono::high_resolution_clock::now();
-//     p_value = n_o_t_m_test_zakrevsky.run_test();
-//     t2 = std::chrono::high_resolution_clock::now();
     
-//     duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
-//     printf("Time spent on task(seconds): %.8f\n", duration_task);
-
-//     printf("Time spent on everything(seconds): %.8f\n", duration_read + duration_task);
-
-//     printf("\nP-value Non_overlapping_template_matching_test: %.8f\n", p_value);
 
 //     std::cout << "----------------------------------------------------------------------" << std::endl;
 
