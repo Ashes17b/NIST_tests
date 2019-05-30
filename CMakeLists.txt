@@ -23,6 +23,7 @@ set(${PROJECT_NAME}_SRC
    ${SRC_PATH}/Vecherko/binary_matrix_rank_test_vecherko.cpp
    ${SRC_PATH}/Vecherko/spectral_test_vecherko.cpp
    ${SRC_PATH}/Grudinsky/spectral_test_grudinsky.cpp
+   ${SRC_PATH}/Vecherko/linear_complexity_test_vecherko.cpp
 )
 
 find_package(Boost 1.65.0)
