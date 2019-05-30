@@ -68,7 +68,7 @@ namespace spectral_test {
         int N = size;
         int i = 0, j = 0, n = 0, k = 0, m = 0, isign = -1,istep,mmax;
 
-        bytes data;
+        bytes_lisai data;
         data = &_buffer[0] - 1;
         n = N*2;
         j = 1;

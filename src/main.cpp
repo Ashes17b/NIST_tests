@@ -8,6 +8,7 @@ using namespace spectral_test;
 using namespace non_overlapping_template_matching_test;
 using namespace longest_runs_test;
 using namespace approximate_entropy_test;
+using namespace binary_matrix_rank_test;
 
 int main()
 {
@@ -27,6 +28,7 @@ int main()
     t1 = std::chrono::high_resolution_clock::now();
     auto p_value = r_test_boltach.run_test();
     t2 = std::chrono::high_resolution_clock::now();
+
     auto duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
     printf("Time spent on task(seconds): %.8f\n", duration_task);
 
@@ -48,6 +50,7 @@ int main()
     t1 = std::chrono::high_resolution_clock::now();
     p_value = r_e_v_test_boltach.run_test();
     t2 = std::chrono::high_resolution_clock::now();
+
     duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
     printf("Time spent on task(seconds): %.8f\n", duration_task);
 
@@ -69,6 +72,7 @@ int main()
     t1 = std::chrono::high_resolution_clock::now();
     p_value = r_test_timoshenko.run_test();
     t2 = std::chrono::high_resolution_clock::now();
+
     duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
     printf("Time spent on task(seconds): %.8f\n", duration_task);
 
@@ -90,12 +94,14 @@ int main()
     t1 = std::chrono::high_resolution_clock::now();
     p_value = r_e_test_timoshenko.run_test();
     t2 = std::chrono::high_resolution_clock::now();
+    
     duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
     printf("Time spent on task(seconds): %.8f\n", duration_task);
 
     printf("Time spent on everything(seconds): %.8f\n", duration_read + duration_task);
     
     printf("\nP-value random_excursions_test: %.8f\n", p_value);
+
     std::cout << "----------------------------------------------------------------------" << std::endl;
     
     Random_excursions_test_bondarev r_e_test_bondarev;
@@ -110,6 +116,7 @@ int main()
     t1 = std::chrono::high_resolution_clock::now();
     p_value = r_e_test_bondarev.run_test();
     t2 = std::chrono::high_resolution_clock::now();
+
     duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
     printf("Time spent on task(seconds): %.8f\n", duration_task);
 
@@ -131,6 +138,7 @@ int main()
     t1 = std::chrono::high_resolution_clock::now();
     p_value = longest_runs_test_bondarev.run_test();
     t2 = std::chrono::high_resolution_clock::now();
+
     duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
     printf("Time spent on task(seconds): %.8f\n", duration_task);
 
@@ -152,6 +160,7 @@ int main()
     t1 = std::chrono::high_resolution_clock::now();
     p_value = n_o_t_m_test_vecherko.run_test(16);
     t2 = std::chrono::high_resolution_clock::now();
+
     duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
     printf("Time spent on task(seconds): %.8f\n", duration_task);
 
@@ -173,6 +182,7 @@ int main()
     t1 = std::chrono::high_resolution_clock::now();
     auto p_value_for_serial = serial_test_lisai.run_test();
     t2 = std::chrono::high_resolution_clock::now();
+
     duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
     printf("Time spent on task(seconds): %.8f\n", duration_task);
 
@@ -191,6 +201,7 @@ int main()
     t1 = std::chrono::high_resolution_clock::now();
     p_value  = spectral_test_lisai.run_test();
     t2 = std::chrono::high_resolution_clock::now();
+
     duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
     printf("Time spent on task(seconds): %.8f\n", duration_task);
 
@@ -212,6 +223,7 @@ int main()
     t1 = std::chrono::high_resolution_clock::now();
     p_value_for_serial = serial_test_zakrevsky.run_test();
     t2 = std::chrono::high_resolution_clock::now();
+    
     duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
     printf("Time spent on task(seconds): %.8f\n", duration_task);
 
@@ -233,6 +245,7 @@ int main()
     t1 = std::chrono::high_resolution_clock::now();
     p_value = appr_entr_test_grudinsky.run_test();
     t2 = std::chrono::high_resolution_clock::now();
+
     duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
     printf("Time spent on task(seconds): %.8f\n", duration_task);
 
@@ -241,11 +254,55 @@ int main()
     printf("\nP-value approximate_entropy_test: %.8f\n", p_value);
 
     std::cout << "----------------------------------------------------------------------" << std::endl;
+    
+    Binary_matrix_rank_test_vecherko b_m_r_test_vecherko;
+
+    t1 = std::chrono::high_resolution_clock::now();
+    b_m_r_test_vecherko.read("../seq/seq7.bin");
+    t2 = std::chrono::high_resolution_clock::now();
+
+    duration_read = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
+    printf("Time spent on read(seconds): %.8f\n", duration_read);
+
+    t1 = std::chrono::high_resolution_clock::now();
+    p_value = b_m_r_test_vecherko.run_test();
+    t2 = std::chrono::high_resolution_clock::now();
+    
+    duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
+    printf("Time spent on task(seconds): %.8f\n", duration_task);
+
+    printf("Time spent on everything(seconds): %.8f\n", duration_read + duration_task);
+
+    printf("\nP-value binary_matrix_rank_test_vecherko: %.8f\n", p_value);
+
+    std::cout << "----------------------------------------------------------------------" << std::endl;
+
+    Spectral_test_vecherko spectral_test_vecherko;
+
+    t1 = std::chrono::high_resolution_clock::now();
+    spectral_test_vecherko.read("../seq/seq7.bin");
+    t2 = std::chrono::high_resolution_clock::now();
+
+    duration_read = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
+    printf("Time spent on read(seconds): %.8f\n", duration_read);
+
+    t1 = std::chrono::high_resolution_clock::now();
+    p_value = spectral_test_vecherko.run_test();
+    t2 = std::chrono::high_resolution_clock::now();
+    
+    duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
+    printf("Time spent on task(seconds): %.8f\n", duration_task);
+
+    printf("Time spent on everything(seconds): %.8f\n", duration_read + duration_task);
+
+    printf("\nP-value spectral_test_vecherko: %.8f\n", p_value);
+
+    std::cout << "----------------------------------------------------------------------" << std::endl;
 
     Spectral_test_grudinsky spectral_test_grudinsky;
 
     t1 = std::chrono::high_resolution_clock::now();
-    spectral_test_grudinsky.read(file_name);
+    spectral_test_grudinsky.read("../seq/seq7.bin");
     t2 = std::chrono::high_resolution_clock::now();
 
     duration_read = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
@@ -254,12 +311,15 @@ int main()
     t1 = std::chrono::high_resolution_clock::now();
     p_value = spectral_test_grudinsky.run_test();
     t2 = std::chrono::high_resolution_clock::now();
+    
     duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
     printf("Time spent on task(seconds): %.8f\n", duration_task);
 
     printf("Time spent on everything(seconds): %.8f\n", duration_read + duration_task);
 
-    printf("\nP-value spectral_test: %.8f\n", p_value);
-    return 0;
+    printf("\nP-value spectral_test_grudinsky: %.8f\n", p_value);
 
+    std::cout << "----------------------------------------------------------------------" << std::endl;
+
+    return 0;
 }

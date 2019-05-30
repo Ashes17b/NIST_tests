@@ -10,3 +10,5 @@
 #include "longest_runs_test_bondarev.hpp"
 #include "spectral_test_grudinsky.hpp"
 #include "approximate_entropy_test_grudinsky.hpp"
+#include "binary_matrix_rank_test_vecherko.hpp"
+#include "spectral_test_vecherko.hpp"

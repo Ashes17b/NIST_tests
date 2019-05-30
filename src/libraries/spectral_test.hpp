@@ -7,6 +7,9 @@
 #include <chrono>
 #include <cmath>
 #include <cassert>
+#include <iterator>
+#include <complex>
+#include <algorithm>
 
 namespace spectral_test {
 

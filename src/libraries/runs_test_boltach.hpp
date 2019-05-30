@@ -6,8 +6,7 @@ namespace runs_test {
 
     using bytes = std::vector<uint8_t>;
 
-    class Runs_test_boltach : public Runs_test
-    {
+    class Runs_test_boltach : public Runs_test {
     public:
         Runs_test_boltach() = default;
         Runs_test_boltach(const Runs_test_boltach &runs_test_boltach) = default;
