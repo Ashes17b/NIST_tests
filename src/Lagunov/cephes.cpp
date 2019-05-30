@@ -1,52 +1,21 @@
-#ifndef CEPHES_H
-#define	CEPHES_H
+#include <stdio.h>
+#include <cmath>
+#include "../libraries/cephes.h"
 
-class Cephes
-{
+static const double	rel_error = 1E-12;
 
-    static const double	rel_error;
+double MACHEP = 1.11022302462515654042E-16;		// 2**-53
+double MAXLOG = 7.09782712893383996732224E2;	// log(MAXNUM)
+double MAXNUM = 1.7976931348623158E308;			// 2**1024*(1-MACHEP)
+double PI     = 3.14159265358979323846;			// pi, duh!
 
-    static const double MACHEP;	// 2**-53
-    static const double MAXLOG;	// log(MAXNUM)
-    static const double MAXNUM;	// 2**1024*(1-MACHEP)
-    static const double PI;	// pi, duh!
+static double big = 4.503599627370496e15;
+static double biginv =  2.22044604925031308085e-16;
 
-    static const double big;
-    static const double biginv;
+int sgngam = 0;
 
-    static int sgngam;
-
-public:
-    Cephes();
-    ~Cephes();
-    
-    static double cephes_igamc(double a, double x);
-    static double cephes_igam(double a, double x);
-    static double cephes_lgam(double x);
-    static double cephes_p1evl(double x, double *coef, int N);
-    static double cephes_polevl(double x, double *coef, int N);
-    static double cephes_erf(double x);
-    static double cephes_erfc(double x);
-    static double cephes_normal(double x);
-
-private:
-
-};
-const double Cephes::rel_error = 1E-12;
-
-const double Cephes::MACHEP = 1.11022302462515654042E-16;  // 2**-53
-const double Cephes::MAXLOG = 7.09782712893383996732224E2; // log(MAXNUM)
-const double Cephes::MAXNUM = 1.7976931348623158E308;	   // 2**1024*(1-MACHEP)
-const double Cephes::PI     = 3.14159265358979323846;	   // pi, duh!
-
-const double Cephes::big    = 4.503599627370496e15;
-const double Cephes::biginv = 2.22044604925031308085e-16;
-
-const int CLOCKS_ON_THE_MOMENT = 10;
-
-int Cephes::sgngam = 0;
-
-double Cephes::cephes_igamc(double a, double x)
+double
+cephes_igamc(double a, double x)
 {
 	double ans, ax, c, yc, r, t, y, z;
 	double pk, pkm1, pkm2, qk, qkm1, qkm2;
@@ -55,12 +24,12 @@ double Cephes::cephes_igamc(double a, double x)
 		return( 1.0 );
 
 	if ( (x < 1.0) || (x < a) )
-		return( 1.e0 - Cephes::cephes_igam(a,x) );
+		return( 1.e0 - cephes_igam(a,x) );
 
-	ax = a * log(x) - x - Cephes::cephes_lgam(a);
+	ax = a * log(x) - x - cephes_lgam(a);
 
 	if ( ax < -MAXLOG ) {
-		printf("igamc: UNDERFLOW %f < %f\n",ax,-MAXLOG);
+		printf("igamc: UNDERFLOW\n");
 		return 0.0;
 	}
 	ax = exp(ax);
@@ -104,7 +73,8 @@ double Cephes::cephes_igamc(double a, double x)
 	return ans*ax;
 }
 
-double Cephes::cephes_igam(double a, double x)
+double
+cephes_igam(double a, double x)
 {
 	double ans, ax, c, r;
 
@@ -112,10 +82,10 @@ double Cephes::cephes_igam(double a, double x)
 		return 0.0;
 
 	if ( (x > 1.0) && (x > a ) )
-		return 1.e0 - Cephes::cephes_igamc(a,x);
+		return 1.e0 - cephes_igamc(a,x);
 
 	/* Compute  x**a * exp(-x) / gamma(a)  */
-	ax = a * log(x) - x - Cephes::cephes_lgam(a);
+	ax = a * log(x) - x - cephes_lgam(a);
 	if ( ax < -MAXLOG ) {
 		printf("igam: UNDERFLOW\n");
 		return 0.0;
@@ -135,6 +105,7 @@ double Cephes::cephes_igam(double a, double x)
 
 	return ans * ax/a;
 }
+
 
 /* A[]: Stirling's formula expansion of log gamma
  * B[], C[]: log gamma function between 2 and 3
@@ -166,16 +137,19 @@ static unsigned short C[] = {
 
 #define MAXLGM 2.556348e305
 
-double Cephes::cephes_lgam(double x)
+
+/* Logarithm of gamma function */
+double
+cephes_lgam(double x)
 {
 	double	p, q, u, w, z;
 	int		i;
 
-	Cephes::sgngam = 1;
+	sgngam = 1;
 
 	if ( x < -34.0 ) {
 		q = -x;
-		w = Cephes::cephes_lgam(q); /* note this modifies sgngam! */
+		w = cephes_lgam(q); /* note this modifies sgngam! */
 		p = floor(q);
 		if ( p == q ) {
 lgsing:
@@ -183,9 +157,9 @@ lgsing:
 		}
 		i = (int)p;
 		if ( (i & 1) == 0 )
-			Cephes::sgngam = -1;
+			sgngam = -1;
 		else
-			Cephes::sgngam = 1;
+			sgngam = 1;
 		z = q - p;
 		if ( z > 0.5 ) {
 			p += 1.0;
@@ -216,16 +190,16 @@ lgsing:
 			u = x + p;
 		}
 		if ( z < 0.0 ) {
-			Cephes::sgngam = -1;
+			sgngam = -1;
 			z = -z;
 		}
 		else
-			Cephes::sgngam = 1;
+			sgngam = 1;
 		if ( u == 2.0 )
 			return( log(z) );
 		p -= 2.0;
 		x = x + p;
-		p = x * Cephes::cephes_polevl( x, (double *)B, 5 ) / Cephes::cephes_p1evl( x, (double *)C, 6);
+		p = x * cephes_polevl( x, (double *)B, 5 ) / cephes_p1evl( x, (double *)C, 6);
 
 		return log(z) + p;
 	}
@@ -234,7 +208,7 @@ lgsing:
 loverf:
 		printf("lgam: OVERFLOW\n");
 
-		return Cephes::sgngam * MAXNUM;
+		return sgngam * MAXNUM;
 	}
 
 	q = ( x - 0.5 ) * log(x) - x + log( sqrt( 2*PI ) );
@@ -247,12 +221,13 @@ loverf:
 		        - 2.7777777777777777777778e-3) *p
 				+ 0.0833333333333333333333) / x;
 	else
-		q += Cephes::cephes_polevl( p, (double *)A, 4 ) / x;
+		q += cephes_polevl( p, (double *)A, 4 ) / x;
 
 	return q;
 }
 
-double Cephes::cephes_polevl(double x, double *coef, int N)
+double
+cephes_polevl(double x, double *coef, int N)
 {
 	double	ans;
 	int		i;
@@ -269,7 +244,8 @@ double Cephes::cephes_polevl(double x, double *coef, int N)
 	return ans;
 }
 
-double Cephes::cephes_p1evl(double x, double *coef, int N)
+double
+cephes_p1evl(double x, double *coef, int N)
 {
 	double	ans;
 	double	*p;
@@ -286,5 +262,69 @@ double Cephes::cephes_p1evl(double x, double *coef, int N)
 	return ans;
 }
 
-#endif	/* CEPHES_H */
+double
+cephes_erf(double x)
+{
+	static const double two_sqrtpi = 1.128379167095512574;
+	double	sum = x, term = x, xsqr = x * x;
+	int		j = 1;
 
+	if ( fabs(x) > 2.2 )
+		return 1.0 - cephes_erfc(x);
+
+	do {
+		term *= xsqr/j;
+		sum -= term/(2*j+1);
+		j++;
+		term *= xsqr/j;
+		sum += term/(2*j+1);
+		j++;
+	} while ( fabs(term)/sum > rel_error );
+
+	return two_sqrtpi*sum;
+}
+
+double
+cephes_erfc(double x)
+{
+	static const double one_sqrtpi = 0.564189583547756287;
+	double	a = 1, b = x, c = x, d = x*x + 0.5;
+	double	q1, q2 = b/d, n = 1.0, t;
+
+	if ( fabs(x) < 2.2 )
+		return 1.0 - cephes_erf(x);
+	if ( x < 0 )
+		return 2.0 - cephes_erfc(-x);
+
+	do {
+		t = a*n + b*x;
+		a = b;
+		b = t;
+		t = c*n + d*x;
+		c = d;
+		d = t;
+		n += 0.5;
+		q1 = q2;
+		q2 = b/d;
+	} while ( fabs(q1-q2)/q2 > rel_error );
+
+	return one_sqrtpi*exp(-x*x)*q2;
+}
+
+
+double
+cephes_normal(double x)
+{
+	double arg, result, sqrt2=1.414213562373095048801688724209698078569672;
+
+	if (x > 0) {
+		arg = x/sqrt2;
+		result = 0.5 * ( 1 + erf(arg) );
+	}
+	else {
+		arg = -x/sqrt2;
+		result = 0.5 * ( 1 - erf(arg) );
+	}
+
+	return( result);
+}
