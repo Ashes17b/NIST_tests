@@ -1,9 +1,5 @@
 #pragma once
 
-#define _USE_MATH_DEFINES
-#define M 50
-#define K 6
-
 #include <iostream>
 #include <cassert>
 #include <fstream>

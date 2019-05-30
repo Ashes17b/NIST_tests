@@ -5,7 +5,7 @@
 
 namespace non_overlapping_template_matching_test {
 
-    using bytes1 = std::vector<char>;
+    using bytes_zakrevsky = std::vector<char>;
 
     class Non_overlapping_template_matching_test_zakrevsky : public Non_overlapping_template_matching_test
     {
@@ -19,7 +19,7 @@ namespace non_overlapping_template_matching_test {
 
         void read(std::string filename = "") override;
 
-        double run_test() const override;
+        long double run_test(std::size_t number_of_blocks = 64) const override;
 
     private:
         long long counter(int pos ,int buf_size, int* temp) const;
@@ -27,7 +27,7 @@ namespace non_overlapping_template_matching_test {
         float poisson_z(float x, float mu) const;
         void init(int* mas, int m) const;
 
-        bytes1 _buffer;
+        bytes_zakrevsky _buffer;
         int size;
         const int m = 9;
         std::string temoString = "100010001";

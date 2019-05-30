@@ -4,7 +4,7 @@
 
 namespace non_overlapping_template_matching_test {
 
-    using bytes = std::vector<bool>;
+    using bytes_vecherko = std::vector<bool>;
 
     class Non_overlapping_template_matching_test_vecherko : public Non_overlapping_template_matching_test {
     public:
@@ -20,16 +20,16 @@ namespace non_overlapping_template_matching_test {
         long double run_test(std::size_t number_of_blocks = 64) const override;
 
     private:
-        void prefix_function(bytes &prefix) const;
+        void prefix_function(bytes_vecherko &prefix) const;
 
-        std::size_t find_first(std::size_t from, std::size_t to, bytes &prefix) const;
+        std::size_t find_first(std::size_t from, std::size_t to, bytes_vecherko &prefix) const;
 
         long double upper_incomplete_gamma(unsigned s, long double x) const;
 
         std::size_t get_size_file(std::string filename) const;
 
-        bytes _buffer;
-        bytes _pattern;
+        bytes_vecherko _buffer;
+        bytes_vecherko _pattern;
     };
 
 } //namespace non_overlapping_template_matching_test

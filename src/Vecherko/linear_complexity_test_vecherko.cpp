@@ -2,6 +2,10 @@
 
 namespace linear_complexity_test {
 
+    // Math defines
+    const auto M = 50;
+    const auto K = 6;
+
     void Linear_complexity_test_vecherko::read(std::string filename /* = "" */) {
         if (filename.empty())
             std::cerr << "Filename is undefined" << std::endl;

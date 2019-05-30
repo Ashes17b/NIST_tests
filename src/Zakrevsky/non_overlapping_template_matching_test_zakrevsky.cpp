@@ -29,7 +29,7 @@ namespace non_overlapping_template_matching_test {
         f.close();
     }
 
-    double Non_overlapping_template_matching_test_zakrevsky::run_test() const {
+    long double Non_overlapping_template_matching_test_zakrevsky::run_test(std::size_t number_of_blocks /* = 64 */) const {
         std::cout << "Started performing non_overlapping_template_matching_test Zakrevsky" << std::endl;
         assert(!_buffer.empty());
         int M = (int)(0.1*size);

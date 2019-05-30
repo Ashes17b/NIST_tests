@@ -5,7 +5,7 @@
 
 namespace linear_complexity_test {
 
-    using bytes = std::vector<int8_t>;
+    using bytes_lagunov = std::vector<int8_t>;
 
     class Linear_complexity_test_lagunov : public Linear_complexity_test
     {
@@ -30,7 +30,7 @@ namespace linear_complexity_test {
         double igamc(int N, int M, std::vector<int> L) const;
         int berlekamp_massey(std::vector<int8_t>& s, int n) const;
 
-        bytes _buffer;
+        bytes_lagunov _buffer;
     };  
 
 } //namespace linear_complexity_test

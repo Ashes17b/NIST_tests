@@ -5,7 +5,7 @@
 
 namespace non_overlapping_template_matching_test {
 
-    using bytes = std::vector<int8_t>;
+    using bytes_lagunov = std::vector<int8_t>;
 
     class Non_overlapping_template_matching_test_lagunov : public Non_overlapping_template_matching_test
     {
@@ -19,7 +19,7 @@ namespace non_overlapping_template_matching_test {
 
         void read(std::string filename = "") override;
 
-        double run_test() const override;
+        long double run_test(std::size_t number_of_blocks = 64) const override;
 
     private:
         
@@ -29,7 +29,7 @@ namespace non_overlapping_template_matching_test {
         double hi_square(int M, int m, std::vector<int>& W) const;
         double igamc(int N, int M, int m, std::vector<int>& W) const;
 
-        bytes _buffer;
+        bytes_lagunov _buffer;
     };  
 
 } //namespace non_overlapping_template_matching_test

@@ -25,7 +25,7 @@ namespace non_overlapping_template_matching_test {
         f.close();
     }
 
-    double Non_overlapping_template_matching_test_lagunov::run_test() const {
+    long double Non_overlapping_template_matching_test_lagunov::run_test(std::size_t number_of_blocks /* = 64 */) const {
         std::cout << "non_overlapping_template_matching_test Lagunov" << std::endl;
         assert(!_buffer.empty());
 
