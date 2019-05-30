@@ -10,17 +10,17 @@
 #include <cmath>
 #include <cstdlib>
 
-namespace random_excursions_test {
+namespace longest_runs_test {
 
-    class Random_excursions_test {
+    class Longest_runs_test {
     public:
-        Random_excursions_test() = default;
+        Longest_runs_test() = default;
 
         virtual void read(std::string filename = "") = 0;
 
         virtual double run_test() const = 0;
 
-        virtual ~Random_excursions_test() = default;
+        virtual ~Longest_runs_test() = default;
     };
 
-} // namespace random_excursions_test
+} // namespace longest_runs_test

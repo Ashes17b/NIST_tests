@@ -29,7 +29,7 @@ namespace serial_test {
         assert(!_buffer.empty());
 
         auto n = _buffer.size();
-        auto m = 2;
+        auto m = param_m;
         double	p_value1, p_value2, psim0, psim1, psim2, del1, del2;
         
         psim0 = psi2(_buffer, m, n);
