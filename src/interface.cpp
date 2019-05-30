@@ -15,8 +15,6 @@ using namespace cumulative_sums_test;
 using namespace overlapping_template_matching_test;
 using namespace maurers_test;
 
-// std::map<>
-
 Nist_tests_interface::Nist_tests_interface() {
     started_instructions();
 }
@@ -63,11 +61,14 @@ void Nist_tests_interface::started_instructions() {
     std::string exit;
     std::cout << "Do you want to continue or complete the execution(Enter exit for shut down)?" << std::endl;
     std::cin >> exit;
-    if (exit != "exit" || exit != "Exit")
+    if (exit != "exit" && exit != "Exit")
         started_instructions();
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
+std::map<double, std::string> test_read_stat;
+std::map<double, std::string> test_task_stat;
+std::map<double, std::string> test_stat;
 
 void Nist_tests_interface::started_instructions_runs_test() const {
     int number_of_runs_test = 0;
@@ -113,6 +114,9 @@ void Nist_tests_interface::runs_test_boltach() const {
     printf("Time spent on everything(seconds): %.8f\n", duration_read + duration_task);
 
     printf("\nP-value runs_test: %.8f\n", p_value);
+    test_read_stat.insert({duration_read, "Boltach"});
+    test_task_stat.insert({duration_task, "Boltach"});
+    test_stat.insert({duration_read + duration_task, "Boltach"});
     std::cout << "----------------------------------------------------------------------" << std::endl;
 }
 
@@ -138,12 +142,31 @@ void Nist_tests_interface::runs_test_timoshenko() const {
     printf("Time spent on everything(seconds): %.8f\n", duration_read + duration_task);
 
     printf("\nP-value runs_test: %.8f\n", p_value);
+    test_read_stat.insert({duration_read, "Timoshenko"});
+    test_task_stat.insert({duration_task, "Timoshenko"});
+    test_stat.insert({duration_read + duration_task, "Timoshenko"});
     std::cout << "----------------------------------------------------------------------" << std::endl;
 }
 
 void Nist_tests_interface::run_all_runs_test() const {
     runs_test_boltach();
     runs_test_timoshenko();
+
+    std::cout.precision(5);
+    std::cout << "Result for read time: " << std::endl;
+    for (const auto &results : test_read_stat) 
+        std::cout << results.first << "\t" << results.second << std::endl;
+    std::cout << std::endl;
+
+    std::cout << "Result for task time: " << std::endl;
+    for (const auto &results : test_task_stat) 
+        std::cout << results.first << "\t" << results.second << std::endl;
+    std::cout << std::endl;
+
+    std::cout << "The best implementation is " << test_stat.begin()->first << "\t" << test_stat.begin()->second << std::endl;
+    test_read_stat.clear();
+    test_task_stat.clear();
+    test_stat.clear();
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -190,11 +213,30 @@ void Nist_tests_interface::random_excursion_variant_test_boltach() const {
     printf("Time spent on everything(seconds): %.8f\n", duration_read + duration_task);
 
     printf("\nP-value random_excursion_variant_test: %.8f\n", p_value);
+    test_read_stat.insert({duration_read, "Boltach"});
+    test_task_stat.insert({duration_task, "Boltach"});
+    test_stat.insert({duration_read + duration_task, "Boltach"});
     std::cout << "----------------------------------------------------------------------" << std::endl;
 }
 
 void Nist_tests_interface::run_all_random_excursion_variant_test() const {
     random_excursion_variant_test_boltach();
+
+    std::cout.precision(5);
+    std::cout << "Result for read time: " << std::endl;
+    for (const auto &results : test_read_stat) 
+        std::cout << results.first << "\t" << results.second << std::endl;
+    std::cout << std::endl;
+
+    std::cout << "Result for task time: " << std::endl;
+    for (const auto &results : test_task_stat) 
+        std::cout << results.first << "\t" << results.second << std::endl;
+    std::cout << std::endl;
+
+    std::cout << "The best implementation is " << test_stat.begin()->first << "\t" << test_stat.begin()->second << std::endl;
+    test_read_stat.clear();
+    test_task_stat.clear();
+    test_stat.clear();
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -243,6 +285,9 @@ void Nist_tests_interface::random_excursions_test_timoshenko() const {
     printf("Time spent on everything(seconds): %.8f\n", duration_read + duration_task);
     
     printf("\nP-value random_excursions_test: %.8f\n", p_value);
+    test_read_stat.insert({duration_read, "Timoshenko"});
+    test_task_stat.insert({duration_task, "Timoshenko"});
+    test_stat.insert({duration_read + duration_task, "Timoshenko"});
     std::cout << "----------------------------------------------------------------------" << std::endl;
 }
 
@@ -268,12 +313,31 @@ void Nist_tests_interface::random_excursions_test_bondarev() const {
     printf("Time spent on everything(seconds): %.8f\n", duration_read + duration_task);
 
     printf("\nP-value random_excursions_test: %.8f\n", p_value);
-
+    test_read_stat.insert({duration_read, "Bondarev"});
+    test_task_stat.insert({duration_task, "Bondarev"});
+    test_stat.insert({duration_read + duration_task, "Bondarev"});
+    std::cout << "----------------------------------------------------------------------" << std::endl;
 }
 
 void Nist_tests_interface::run_all_random_excursions_test() const {
     random_excursions_test_timoshenko();
     random_excursions_test_bondarev();
+
+    std::cout.precision(5);
+    std::cout << "Result for read time: " << std::endl;
+    for (const auto &results : test_read_stat) 
+        std::cout << results.first << "\t" << results.second << std::endl;
+    std::cout << std::endl;
+
+    std::cout << "Result for task time: " << std::endl;
+    for (const auto &results : test_task_stat) 
+        std::cout << results.first << "\t" << results.second << std::endl;
+    std::cout << std::endl;
+
+    std::cout << "The best implementation is " << test_stat.begin()->first << "\t" << test_stat.begin()->second << std::endl;
+    test_read_stat.clear();
+    test_task_stat.clear();
+    test_stat.clear();
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -320,11 +384,30 @@ void Nist_tests_interface::longest_runs_test_bondarev() const {
     printf("Time spent on everything(seconds): %.8f\n", duration_read + duration_task);
 
     printf("\nP-value longest_runs_test: %.8f\n", p_value);
+    test_read_stat.insert({duration_read, "Bondarev"});
+    test_task_stat.insert({duration_task, "Bondarev"});
+    test_stat.insert({duration_read + duration_task, "Bondarev"});
     std::cout << "----------------------------------------------------------------------" << std::endl;
 }
 
 void Nist_tests_interface::run_all_longest_runs_test() const {
     longest_runs_test_bondarev();
+
+    std::cout.precision(5);
+    std::cout << "Result for read time: " << std::endl;
+    for (const auto &results : test_read_stat) 
+        std::cout << results.first << "\t" << results.second << std::endl;
+    std::cout << std::endl;
+
+    std::cout << "Result for task time: " << std::endl;
+    for (const auto &results : test_task_stat) 
+        std::cout << results.first << "\t" << results.second << std::endl;
+    std::cout << std::endl;
+
+    std::cout << "The best implementation is " << test_stat.begin()->first << "\t" << test_stat.begin()->second << std::endl;
+    test_read_stat.clear();
+    test_task_stat.clear();
+    test_stat.clear();
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -376,6 +459,9 @@ void Nist_tests_interface::non_overlapping_template_matching_test_vecherko() con
     printf("Time spent on everything(seconds): %.8f\n", duration_read + duration_task);
 
     printf("\nP-value non_overlapping_template_matching_test: %.8Lf\n", p_value);
+    test_read_stat.insert({duration_read, "Vecherko"});
+    test_task_stat.insert({duration_task, "Vecherko"});
+    test_stat.insert({duration_read + duration_task, "Vecherko"});
     std::cout << "----------------------------------------------------------------------" << std::endl;
 }
 
@@ -400,6 +486,9 @@ void Nist_tests_interface::non_overlapping_template_matching_test_lagunov() cons
     printf("Time spent on everything(seconds): %.8f\n", duration_read + duration_task);
 
     printf("\nP-value non_overlapping_template_matching_test: %.8Lf\n", p_value);
+    test_read_stat.insert({duration_read, "Lagunov"});
+    test_task_stat.insert({duration_task, "Lagunov"});
+    test_stat.insert({duration_read + duration_task, "Lagunov"});
     std::cout << "----------------------------------------------------------------------" << std::endl;
 }
 
@@ -424,6 +513,9 @@ void Nist_tests_interface::non_overlapping_template_matching_test_zakrevsky() co
     printf("Time spent on everything(seconds): %.8f\n", duration_read + duration_task);
 
     printf("\nP-value non_overlapping_template_matching_test: %.8Lf\n", p_value);
+    test_read_stat.insert({duration_read, "Zakrevsky"});
+    test_task_stat.insert({duration_task, "Zakrevsky"});
+    test_stat.insert({duration_read + duration_task, "Zakrevsky"});
     std::cout << "----------------------------------------------------------------------" << std::endl;
 }
 
@@ -431,6 +523,22 @@ void Nist_tests_interface::run_all_non_overlapping_template_matching_test() cons
     non_overlapping_template_matching_test_vecherko();
     non_overlapping_template_matching_test_lagunov();
     non_overlapping_template_matching_test_zakrevsky();
+
+    std::cout.precision(5);
+    std::cout << "Result for read time: " << std::endl;
+    for (const auto &results : test_read_stat) 
+        std::cout << results.first << "\t" << results.second << std::endl;
+    std::cout << std::endl;
+
+    std::cout << "Result for task time: " << std::endl;
+    for (const auto &results : test_task_stat) 
+        std::cout << results.first << "\t" << results.second << std::endl;
+    std::cout << std::endl;
+
+    std::cout << "The best implementation is " << test_stat.begin()->first << "\t" << test_stat.begin()->second << std::endl;
+    test_read_stat.clear();
+    test_task_stat.clear();
+    test_stat.clear();
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
