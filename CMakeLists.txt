@@ -8,6 +8,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 set(${PROJECT_NAME}_SRC
    ${SRC_PATH}/main.cpp
+   ${SRC_PATH}/interface.cpp
    ${SRC_PATH}/utils/cephes.cpp
    ${SRC_PATH}/Boltach/runs_test_boltach.cpp
    ${SRC_PATH}/Boltach/random_excursion_variant_test_boltach.cpp
