@@ -15,6 +15,8 @@ using namespace cumulative_sums_test;
 using namespace overlapping_template_matching_test;
 using namespace maurers_test;
 
+// std::map<>
+
 Nist_tests_interface::Nist_tests_interface() {
     started_instructions();
 }
@@ -58,10 +60,10 @@ void Nist_tests_interface::started_instructions() {
                 break;
     }
 
-    uint8_t exit = 1;
-    std::cout << "Do you want to continue or complete the execution(enter 0 for exit)?" << std::endl;
+    std::string exit;
+    std::cout << "Do you want to continue or complete the execution(Enter exit for shut down)?" << std::endl;
     std::cin >> exit;
-    if (!exit)
+    if (exit != "exit" || exit != "Exit")
         started_instructions();
 }
 

@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <chrono>
+#include <map>
 
 class Nist_tests_interface {
 private:
