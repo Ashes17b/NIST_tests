@@ -39,7 +39,7 @@ namespace non_overlapping_template_matching_test {
         long double mean = (block_size - _pattern.size() + 1.l) / (1 << _pattern.size());
         long double variance = block_size * (1.l / (1 << _pattern.size()) - ((_pattern.size() << 1) - 1.l) / (1 << (_pattern.size() << 1)));
         
-        bytes prefix;
+        bytes_vecherko prefix;
         prefix_function(prefix);
 
         for (size_t from = 0, to = block_size; to <= _buffer.size(); to += block_size) {
@@ -54,7 +54,7 @@ namespace non_overlapping_template_matching_test {
         return upper_incomplete_gamma(number_of_blocks, chi2 / 2.l);
     }
 
-    void Non_overlapping_template_matching_test_vecherko::prefix_function(bytes &prefix) const {
+    void Non_overlapping_template_matching_test_vecherko::prefix_function(bytes_vecherko &prefix) const {
         prefix.assign(_pattern.size(), 0);
 
         for (size_t i = 1; i < prefix.size(); ++i) {
@@ -69,7 +69,7 @@ namespace non_overlapping_template_matching_test {
         }
     }
 
-    std::size_t Non_overlapping_template_matching_test_vecherko::find_first(std::size_t from, std::size_t to, bytes &prefix) const {
+    std::size_t Non_overlapping_template_matching_test_vecherko::find_first(std::size_t from, std::size_t to, bytes_vecherko &prefix) const {
         for (size_t matched_values = 0; from + _pattern.size() <= to;) {
         
             while (matched_values < _pattern.size() && _buffer[from + matched_values] == _pattern[matched_values]) 
