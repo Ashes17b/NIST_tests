@@ -7,9 +7,6 @@ namespace spectral_test {
     using bytes = double *;
 
     class Spectral_test_lisai : public Spectral_test {
-    private:
-        std::string _filename;
-    
     public:
         Spectral_test_lisai() = default;
         Spectral_test_lisai(const Spectral_test_lisai &spectral_test_lisai) = default;

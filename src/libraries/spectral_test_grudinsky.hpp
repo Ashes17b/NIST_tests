@@ -7,9 +7,6 @@ namespace spectral_test {
     using bytes = double *;
 
     class Spectral_test_grudinsky : public Spectral_test {
-    private:
-        std::string _filename;
-    
     public:
         Spectral_test_grudinsky() = default;
         Spectral_test_grudinsky(const Spectral_test_grudinsky &spectral_test_grudinsky) = default;
@@ -30,4 +27,4 @@ namespace spectral_test {
         double f(double x, double a);
         int largest_pow(int n);
     };
-} //namespace runs_test
+} //namespace spectral_test

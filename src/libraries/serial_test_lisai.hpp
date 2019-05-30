@@ -18,22 +18,14 @@ namespace serial_test {
 
         void read(std::string filename = "") override;
 
-        /**
-         * This will be some about Serial Test (maybe, or not)
-         * 
-        */
         std::pair<double, double> run_test() const override;
 
     private:
-        /**
-         * Calculate some important things
-         * 
-        */
         double psi2(bytes epsilon, int m, int n) const;
-        
         std::size_t get_size_file(std::string filename) const;
-
+                
         bytes _buffer;
+        int param_m = 2;
     };  
 
-} //namespace runs_test
+} //namespace serial_test

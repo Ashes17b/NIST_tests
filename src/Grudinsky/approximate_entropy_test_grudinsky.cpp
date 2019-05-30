@@ -113,9 +113,9 @@ namespace approximate_entropy_test {
         return p_value;
     }
     
-    double Approximate_entropy_test_grudinsky::f(double x, double a) {
-        return exp(-x) * pow(x, a - 1);
-    }
+    // double Approximate_entropy_test_grudinsky::f(double x, double a) {
+    //     return exp(-x) * pow(x, a - 1);
+    // }
 
     std::size_t Approximate_entropy_test_grudinsky::get_size_file(std::string filename) const {
         std::ifstream f(filename, std::ios::binary | std::ios::in | std::ifstream::ate);
