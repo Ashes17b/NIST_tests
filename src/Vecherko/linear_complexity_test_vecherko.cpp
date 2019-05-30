@@ -42,7 +42,6 @@ namespace linear_complexity_test {
             v[get_v_index(t)]++;
 
             seq += byte_add;
-            offset + bit_add;
             if (offset >= 8) {
                 seq++;
                 offset -= 8;
