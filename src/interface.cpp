@@ -38,6 +38,9 @@ void Nist_tests_interface::print_statistic() const {
     std::cout << std::endl;
 
     std::cout << "The best implementation is " << test_stat.begin()->first << "\t" << test_stat.begin()->second << std::endl;
+    test_read_stat.clear();
+    test_task_stat.clear();
+    test_stat.clear();
     std::cout << "----------------------------------------------------------------------" << std::endl;
 }
 
