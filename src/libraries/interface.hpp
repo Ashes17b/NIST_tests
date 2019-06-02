@@ -17,9 +17,11 @@ public:
 private:
     std::string file_name;
 
+    void print_statistic() const;
+
     void started_instructions();
 
-    void print_statistic() const;
+    void run_all_tests() const;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     void started_instructions_runs_test() const;

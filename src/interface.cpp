@@ -55,7 +55,7 @@ void Nist_tests_interface::started_instructions() {
 
     std::string input;
     int number_of_test = 0;
-    std::cout << "Choose STATISTICAL TEST - ";
+    std::cout << "Choose STATISTICAL TEST(or 0 for run all) - ";
 
     std::cin >> input;
 
@@ -66,7 +66,7 @@ void Nist_tests_interface::started_instructions() {
         started_instructions();
     }
 
-    if (number_of_test < 1 && number_of_test > 13) {
+    if (number_of_test < 0 && number_of_test > 13) {
         std::cerr << "Incorrect number of test, try again" << std::endl;
         started_instructions();
     }
@@ -79,6 +79,8 @@ void Nist_tests_interface::started_instructions() {
     }
 
     switch(number_of_test) {
+        case 0: run_all_tests(); 
+                break;
         case 1: started_instructions_runs_test(); 
                 break;
         case 2: started_instructions_random_excursion_variant_test(); 
@@ -108,10 +110,26 @@ void Nist_tests_interface::started_instructions() {
     }
 
     std::string exit;
-    std::cout << "Do you want to continue or complete the execution(Enter exit for shut down)?" << std::endl;
+    std::cout << "Do you want to continue or complete the execution(Enter exit for shutdown)?" << std::endl;
     std::cin >> exit;
     if (exit != "exit" && exit != "Exit")
         started_instructions();
+}
+
+void Nist_tests_interface::run_all_tests() const {
+    run_all_runs_test();
+    run_all_random_excursion_variant_test();
+    run_all_random_excursions_test();
+    run_all_longest_runs_test();
+    run_all_non_overlapping_template_matching_test();
+    run_all_serial_test();
+    run_all_spectral_test();
+    run_all_linear_complexity_test();
+    run_all_approximate_entropy_test();
+    run_all_binary_matrix_rank_test();
+    run_all_cumulative_sums_test();
+    run_all_overlapping_template_matching_test();
+    run_all_maurers_test();
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
