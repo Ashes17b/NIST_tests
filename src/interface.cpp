@@ -26,6 +26,7 @@ std::map<double, std::string> test_task_stat;
 std::map<double, std::string> test_stat;
 ////////////////////////////////////////////////////////////////////////////////////////////////
 void Nist_tests_interface::print_statistic() const {
+    std::cout << "----------------------------------------------------------------------" << std::endl;
     std::cout << "Result for read time: " << std::endl;
     for (const auto &results : test_read_stat) 
         std::cout << results.first << "\t" << results.second << std::endl;
@@ -37,9 +38,7 @@ void Nist_tests_interface::print_statistic() const {
     std::cout << std::endl;
 
     std::cout << "The best implementation is " << test_stat.begin()->first << "\t" << test_stat.begin()->second << std::endl;
-    test_read_stat.clear();
-    test_task_stat.clear();
-    test_stat.clear();
+    std::cout << "----------------------------------------------------------------------" << std::endl;
 }
 
 void Nist_tests_interface::started_instructions() {
@@ -108,6 +107,9 @@ void Nist_tests_interface::started_instructions() {
         case 13: started_instructions_maurers_test();
                 break;
     }
+    test_read_stat.clear();
+    test_task_stat.clear();
+    test_stat.clear();
 
     std::string exit;
     std::cout << "Do you want to continue or complete the execution(Enter exit for shutdown)?" << std::endl;
