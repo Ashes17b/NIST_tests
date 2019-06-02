@@ -7,7 +7,7 @@ namespace non_overlapping_template_matching_test {
         if (filename.empty())
             std::cerr << "Filename is undefined" << std::endl;
         else 
-            std::cout << "Read from(Linear_complexity_test Lagunov) " << filename << std::endl;
+            std::cout << "Read from(non_overlapping_template_matching_test Lagunov) " << filename << std::endl;
         
         std::ifstream f(filename, std::ios::binary | std::ios::in);
 
