@@ -38,7 +38,7 @@ namespace serial_test {
         
         del1 = psim0 - psim1;
         del2 = psim0 - 2.0 * psim1 + psim2;
-        std::cout << del1 << " ---- " << del2 << std::endl;
+        
         p_value1 = cephes_igamc(pow(2, m-2), del1 / 2.0);
         p_value2 = cephes_igamc(pow(2, m-3), del2 / 2.0);
         

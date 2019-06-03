@@ -6,7 +6,7 @@ namespace spectral_test {
         if (filename.empty())
             std::cerr << "Filename is undefined" << std::endl;
         else
-            std::cout << "Read from(Binary_matrix_rank_test Vecherko) " << filename << std::endl;
+            std::cout << "Read from(Spectral_test Vecherko) " << filename << std::endl;
 
         std::ifstream f(filename, std::ios::binary | std::ios::in);
 
@@ -40,7 +40,7 @@ namespace spectral_test {
     }
 
     double Spectral_test_vecherko::run_test() {
-        std::cout << "Started performing binary_matrix_rank_test Vecherko" << std::endl;
+        std::cout << "Started performing spectral_test Vecherko" << std::endl;
         assert(!_buffer.empty());
 
         for(int i = 0; i < _buffer.size(); ++i) {
