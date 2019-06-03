@@ -17,7 +17,7 @@ namespace non_overlapping_template_matching_test {
 
         void read(std::string filename = "") override;
 
-        long double run_test(std::size_t number_of_blocks = 64) const override;
+        long double run_test(std::size_t number_of_blocks = 16, std::string _pattern = "000000001") const override;
 
     private:
         void prefix_function(bytes_vecherko &prefix) const;

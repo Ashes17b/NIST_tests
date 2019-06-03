@@ -19,11 +19,11 @@ namespace non_overlapping_template_matching_test {
 
         void read(std::string filename = "") override;
 
-        long double run_test(std::size_t number_of_blocks = 64) const override;
+        long double run_test(std::size_t number_of_blocks = 16, std::string _pattern = "000000001") const override;
 
     private:
         
-        int calculate_W(const std::vector<int8_t>& seq, int s, int e, const std::vector<int8_t>& temp, int M) const;
+        int calculate_W(int s, int e, const std::string _pattern, int M) const;
         double mean(int M, int m) const;
         double variance(int M, int m) const;
         double hi_square(int M, int m, std::vector<int>& W) const;

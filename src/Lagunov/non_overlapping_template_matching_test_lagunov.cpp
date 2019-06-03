@@ -25,36 +25,38 @@ namespace non_overlapping_template_matching_test {
         f.close();
     }
 
-    long double Non_overlapping_template_matching_test_lagunov::run_test(std::size_t number_of_blocks /* = 64 */) const {
+    long double Non_overlapping_template_matching_test_lagunov::run_test(std::size_t number_of_blocks /* = 16 */, std::string _pattern /* = '000000001' */) const {
         std::cout << "non_overlapping_template_matching_test Lagunov" << std::endl;
         assert(!_buffer.empty());
 
-        int N = 16;
-        std::vector<int8_t> temp = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1};
-        int m = temp.size();
+        int N = number_of_blocks;
+        // std::vector<int8_t> _pattern = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1};
+        int m = _pattern.size();
         std::vector<int> w(N);
         int M = _buffer.size() / N;
         for (int i = 0; i < N; i++) {
             int start = M*i;
             int end = M*(i + 1);
-            w[i] = calculate_W(_buffer, start, end, temp, M);
+            w[i] = calculate_W(start, end, _pattern, M);
         }
+
         double p = igamc(N, M, m, w);
         return p;
     }
 
-    int Non_overlapping_template_matching_test_lagunov::calculate_W(const std::vector<int8_t>& seq, int s, int e, const std::vector<int8_t>& temp, int M) const {
+    int Non_overlapping_template_matching_test_lagunov::calculate_W(int s, int e, const std::string _pattern, int M) const {
         long int t = 0;
         int W = 0;
-        for (int i = 0; i < temp.size(); i++)
-            t += pow(2, i)*temp[i];
+        for (int i = 0; i < _pattern.size(); i++)
+            t += (long int)pow(2, i) * ((int)_pattern[i] - 48);  // or you can use this: static_cast<int>(_pattern[i]);
         for (int i = s; i < e; i++) {
             long int ksi = 0;
-            for (int j = 0; j < temp.size(); j++)
-                ksi += pow(2, j)*seq[i+j];
+            for (int j = 0; j < _pattern.size(); j++)
+                ksi += pow(2, j) * _buffer[i+j];
             if (ksi == t)
                 W++;
         }
+
         return W;
     }
 

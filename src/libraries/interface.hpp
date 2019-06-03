@@ -55,18 +55,18 @@ private:
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     void started_instructions_non_overlapping_template_matching_test() const;
-    void non_overlapping_template_matching_test_vecherko() const;
-    void non_overlapping_template_matching_test_lagunov() const;
-    void non_overlapping_template_matching_test_zakrevsky() const;
-    void run_all_non_overlapping_template_matching_test() const; // << 5
+    void non_overlapping_template_matching_test_vecherko(int param_M = 16, std::string pattern = "000000001") const;
+    void non_overlapping_template_matching_test_lagunov(int param_M = 16, std::string pattern = "000000001") const;
+    void non_overlapping_template_matching_test_zakrevsky(int param_M = 16, std::string pattern = "000000001") const;
+    void run_all_non_overlapping_template_matching_test(int param_M = 16, std::string pattern = "000000001") const; // << 5
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     void started_instructions_serial_test() const;
-    void serial_test_lisai() const;
-    void serial_test_zakrevsky() const;
-    void run_all_serial_test() const; // << 6
+    void serial_test_lisai(int param_m = 2) const;
+    void serial_test_zakrevsky(int param_m = 2) const;
+    void run_all_serial_test(int param_m = 2) const; // << 6
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -81,16 +81,16 @@ private:
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     void started_instructions_linear_complexity_test() const;
-    void linear_complexity_test_vecherko() const;
-    void linear_complexity_test_lagunov() const;
-    void run_all_linear_complexity_test() const; // << 8
+    void linear_complexity_test_vecherko(int param_N = 50) const;
+    void linear_complexity_test_lagunov(int param_N = 50) const;
+    void run_all_linear_complexity_test(int param_N = 50) const; // << 8
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     void started_instructions_approximate_entropy_test() const;
-    void approximate_entropy_test_grudinsky() const;
-    void run_all_approximate_entropy_test() const; // << 9
+    void approximate_entropy_test_grudinsky(int param_m = 4) const;
+    void run_all_approximate_entropy_test(int param_m = 4) const; // << 9
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
 

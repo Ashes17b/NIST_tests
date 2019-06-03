@@ -3,7 +3,7 @@
 
 namespace serial_test {
 
-    void Serial_test_lisai::read(std::string filename) {
+    void Serial_test_lisai::read(std::string filename, int param_m) {
         if (filename.empty())
             std::cerr << "Filename is undefined" << std::endl;
         else
@@ -24,7 +24,7 @@ namespace serial_test {
         f.close();
     }
 
-    std::pair<double, double> Serial_test_lisai::run_test() const {
+    std::pair<double, double> Serial_test_lisai::run_test(int param_m) const {
         std::cout << "Started performing serial_test Lisai" << std::endl;
         assert(!_buffer.empty());
 
@@ -38,7 +38,7 @@ namespace serial_test {
         
         del1 = psim0 - psim1;
         del2 = psim0 - 2.0 * psim1 + psim2;
-
+        std::cout << del1 << " ---- " << del2 << std::endl;
         p_value1 = cephes_igamc(pow(2, m-2), del1 / 2.0);
         p_value2 = cephes_igamc(pow(2, m-3), del2 / 2.0);
         

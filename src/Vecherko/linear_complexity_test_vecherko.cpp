@@ -26,11 +26,12 @@ namespace linear_complexity_test {
         _buffer = new bytes((byte*)buffer, pos);
     }
 
-    double Linear_complexity_test_vecherko::run_test() const {
+    double Linear_complexity_test_vecherko::run_test(int param_m) const {
         std::cout << "Started performing linear_complexity_test Vecherko" << std::endl;
         auto seq = _buffer->seq;
         auto len = _buffer->len;
 
+        int M = param_m;
         int n = 8 * len;
         int N = n/M;
         int v[7] = {0, 0, 0, 0, 0, 0, 0};

@@ -427,31 +427,45 @@ void Nist_tests_interface::run_all_longest_runs_test() const {
 
 void Nist_tests_interface::started_instructions_non_overlapping_template_matching_test() const {
     int number_of_non_overlapping_template_matching_test = 0;
+    int param_N = 16, input_param_N;
+    std::string pattern = "0000000001", input_pattern;
+
     std::cout << " W E L C O M E  TO  N O N  O V E R L A P P I N G  T E M P L A T E  M A T C H I N G  T E S T " << std::endl;
     std::cout << "____________________________________________________________________________________________\n" << std::endl;
     std::cout << "[01] Non overlapping template matching test Vecherko  [02] Non overlapping template matching test Lagunov" << std::endl;
     std::cout << "[03] Non overlapping template matching test Zakrevsky\n" << std::endl;
     std::cout << "Enter test implementation number or 0 for run all - " << std::endl;
     std::cin >> number_of_non_overlapping_template_matching_test;
+    std::cout << "Enter N for the test or 0 for devault (default N = 16) -" << std::endl;
+    std::cin >> input_param_N;
+
+    if (input_param_N != 0)
+        param_N = input_param_N;
+    
+    std::cout << "Enter pattern for the test or 0 for devault (default _pattern = 0000000001) -" << std::endl;
+    std::cin >> input_pattern;
+
+    if (input_pattern != "0")
+        pattern = input_pattern;
 
     if (number_of_non_overlapping_template_matching_test == 0)
-        run_all_non_overlapping_template_matching_test();
+        run_all_non_overlapping_template_matching_test(param_N, pattern);
     else if (number_of_non_overlapping_template_matching_test < 1 && number_of_non_overlapping_template_matching_test > 3) {
         std::cerr << "Incorrect number of test, try again" << std::endl;
         started_instructions_non_overlapping_template_matching_test();
     }
     
     switch(number_of_non_overlapping_template_matching_test) {
-        case 1: non_overlapping_template_matching_test_vecherko();
+        case 1: non_overlapping_template_matching_test_vecherko(param_N, pattern);
                 break;
-        case 2: non_overlapping_template_matching_test_lagunov();
+        case 2: non_overlapping_template_matching_test_lagunov(param_N, pattern);
                 break;
-        case 3: non_overlapping_template_matching_test_zakrevsky();
+        case 3: non_overlapping_template_matching_test_zakrevsky(param_N, pattern);
                 break;
     }
 }
 
-void Nist_tests_interface::non_overlapping_template_matching_test_vecherko() const {
+void Nist_tests_interface::non_overlapping_template_matching_test_vecherko(int param_N, std::string pattern) const {
     std::cout << "----------------------------------------------------------------------" << std::endl;
     Non_overlapping_template_matching_test_vecherko n_o_t_m_test_vecherko;
 
@@ -463,7 +477,7 @@ void Nist_tests_interface::non_overlapping_template_matching_test_vecherko() con
     printf("Time spent on read(seconds): %.8f\n", duration_read);
 
     t1 = std::chrono::high_resolution_clock::now();
-    auto p_value = n_o_t_m_test_vecherko.run_test();
+    auto p_value = n_o_t_m_test_vecherko.run_test(param_N, pattern);
     t2 = std::chrono::high_resolution_clock::now();
 
     auto duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
@@ -478,7 +492,7 @@ void Nist_tests_interface::non_overlapping_template_matching_test_vecherko() con
     std::cout << "----------------------------------------------------------------------" << std::endl;
 }
 
-void Nist_tests_interface::non_overlapping_template_matching_test_lagunov() const {
+void Nist_tests_interface::non_overlapping_template_matching_test_lagunov(int param_N, std::string pattern) const {
     std::cout << "----------------------------------------------------------------------" << std::endl;
     Non_overlapping_template_matching_test_lagunov n_o_t_m_test_lagunov;
 
@@ -490,7 +504,7 @@ void Nist_tests_interface::non_overlapping_template_matching_test_lagunov() cons
     printf("Time spent on read(seconds): %.8f\n", duration_read);
 
     t1 = std::chrono::high_resolution_clock::now();
-    auto p_value = n_o_t_m_test_lagunov.run_test();
+    auto p_value = n_o_t_m_test_lagunov.run_test(param_N, pattern);
     t2 = std::chrono::high_resolution_clock::now();
     
     auto duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
@@ -505,7 +519,7 @@ void Nist_tests_interface::non_overlapping_template_matching_test_lagunov() cons
     std::cout << "----------------------------------------------------------------------" << std::endl;
 }
 
-void Nist_tests_interface::non_overlapping_template_matching_test_zakrevsky() const {
+void Nist_tests_interface::non_overlapping_template_matching_test_zakrevsky(int param_N, std::string pattern) const {
     std::cout << "----------------------------------------------------------------------" << std::endl;
     Non_overlapping_template_matching_test_zakrevsky n_o_t_m_test_zakrevsky;
 
@@ -517,7 +531,7 @@ void Nist_tests_interface::non_overlapping_template_matching_test_zakrevsky() co
     printf("Time spent on read(seconds): %.8f\n", duration_read);
 
     t1 = std::chrono::high_resolution_clock::now();
-    auto p_value = n_o_t_m_test_zakrevsky.run_test();
+    auto p_value = n_o_t_m_test_zakrevsky.run_test(param_N, pattern);
     t2 = std::chrono::high_resolution_clock::now();
     
     auto duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
@@ -532,10 +546,10 @@ void Nist_tests_interface::non_overlapping_template_matching_test_zakrevsky() co
     std::cout << "----------------------------------------------------------------------" << std::endl;
 }
 
-void Nist_tests_interface::run_all_non_overlapping_template_matching_test() const {
-    non_overlapping_template_matching_test_vecherko();
-    non_overlapping_template_matching_test_lagunov();
-    non_overlapping_template_matching_test_zakrevsky();
+void Nist_tests_interface::run_all_non_overlapping_template_matching_test(int param_N, std::string pattern) const {
+    non_overlapping_template_matching_test_vecherko(param_N, pattern);
+    non_overlapping_template_matching_test_lagunov(param_N, pattern);
+    non_overlapping_template_matching_test_zakrevsky(param_N, pattern);
 
     print_statistic();
 }
@@ -544,11 +558,18 @@ void Nist_tests_interface::run_all_non_overlapping_template_matching_test() cons
 
 void Nist_tests_interface::started_instructions_serial_test() const {
     int number_of_serial_test = 0;
+    int param_m = 2, input_param_m;
+
     std::cout << " W E L C O M E  TO  S E R I A L  T E S T " << std::endl;
     std::cout << "_________________________________________\n" << std::endl;
     std::cout << "[01] Serial test Lisai  [02] Serial test Zakrevsky\n" << std::endl;
     std::cout << "Enter test implementation number or 0 for run all - " << std::endl;
-    std::cin >> number_of_serial_test;
+    std::cin >> number_of_serial_test;    
+    std::cout << "Enter param_m for the test or 0 for devault (default m = 2) -" << std::endl;
+    std::cin >> input_param_m;
+
+    if (input_param_m != 0)
+        param_m = input_param_m;
 
     if (number_of_serial_test == 0)
         run_all_serial_test();
@@ -558,17 +579,17 @@ void Nist_tests_interface::started_instructions_serial_test() const {
     }
     
     switch(number_of_serial_test) {
-        case 1: serial_test_lisai();
+        case 1: serial_test_lisai(param_m);
                 break;
-        case 2: serial_test_zakrevsky();
+        case 2: serial_test_zakrevsky(param_m);
                 break;
     }
 }
 
-void Nist_tests_interface::serial_test_lisai() const {
+void Nist_tests_interface::serial_test_lisai(int param_m) const {
     std::cout << "----------------------------------------------------------------------" << std::endl;
     Serial_test_lisai serial_test_lisai;
-
+    
     auto t1 = std::chrono::high_resolution_clock::now();
     serial_test_lisai.read(file_name);
     auto t2 = std::chrono::high_resolution_clock::now();
@@ -577,7 +598,7 @@ void Nist_tests_interface::serial_test_lisai() const {
     printf("Time spent on read(seconds): %.8f\n", duration_read);
 
     t1 = std::chrono::high_resolution_clock::now();
-    auto p_value_for_serial = serial_test_lisai.run_test();
+    auto p_value_for_serial = serial_test_lisai.run_test(param_m);
     t2 = std::chrono::high_resolution_clock::now();
 
     auto duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
@@ -592,19 +613,19 @@ void Nist_tests_interface::serial_test_lisai() const {
     std::cout << "----------------------------------------------------------------------" << std::endl;
 }
 
-void Nist_tests_interface::serial_test_zakrevsky() const {
+void Nist_tests_interface::serial_test_zakrevsky(int param_m) const {
     std::cout << "----------------------------------------------------------------------" << std::endl;
     Serial_test_zakrevsky serial_test_zakrevsky;
 
     auto t1 = std::chrono::high_resolution_clock::now();
-    serial_test_zakrevsky.read(file_name);
+    serial_test_zakrevsky.read(file_name, param_m);
     auto t2 = std::chrono::high_resolution_clock::now();
 
     auto duration_read = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
     printf("Time spent on read(seconds): %.8f\n", duration_read);
 
     t1 = std::chrono::high_resolution_clock::now();
-    auto p_value_for_serial = serial_test_zakrevsky.run_test();
+    auto p_value_for_serial = serial_test_zakrevsky.run_test(param_m);
     t2 = std::chrono::high_resolution_clock::now();
     
     auto duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
@@ -619,9 +640,9 @@ void Nist_tests_interface::serial_test_zakrevsky() const {
     std::cout << "----------------------------------------------------------------------" << std::endl;
 }
 
-void Nist_tests_interface::run_all_serial_test() const {
-    serial_test_lisai();
-    serial_test_zakrevsky();
+void Nist_tests_interface:: run_all_serial_test(int param_m) const {
+    serial_test_lisai(param_m);
+    serial_test_zakrevsky(param_m);
 
     print_statistic();
 }
@@ -747,28 +768,35 @@ void Nist_tests_interface::run_all_spectral_test() const {
 
 void Nist_tests_interface::started_instructions_linear_complexity_test() const {
     int number_of_linear_complexity_test = 0;
+    int param_N = 50, input_param_N;
+
     std::cout << " W E L C O M E  TO  L I N E A R  C O M P L E X I T Y  T E S T " << std::endl;
     std::cout << "______________________________________________________________\n" << std::endl;
     std::cout << "[01] Linear complexity test Vecherko  [02] Linear complexity test Lagunov\n" << std::endl;
     std::cout << "Enter test implementation number or 0 for run all - " << std::endl;
     std::cin >> number_of_linear_complexity_test;
+    std::cout << "Enter N for the test: or 0 for devault (default m = 50) -" << std::endl;
+    std::cin >> input_param_N;
+
+    if (input_param_N != 0)
+        param_N = input_param_N;
 
     if (number_of_linear_complexity_test == 0)
-        run_all_linear_complexity_test();
+        run_all_linear_complexity_test(param_N);
     else if (number_of_linear_complexity_test < 1 && number_of_linear_complexity_test > 2) {
         std::cerr << "Incorrect number of test, try again" << std::endl;
         started_instructions_linear_complexity_test();
     }
     
     switch(number_of_linear_complexity_test) {
-        case 1: linear_complexity_test_vecherko();
+        case 1: linear_complexity_test_vecherko(param_N);
                 break;
-        case 2: linear_complexity_test_lagunov();
+        case 2: linear_complexity_test_lagunov(param_N);
                 break;
     }
 }
 
-void Nist_tests_interface::linear_complexity_test_vecherko() const {
+void Nist_tests_interface::linear_complexity_test_vecherko(int param_N) const {
     std::cout << "----------------------------------------------------------------------" << std::endl;
     Linear_complexity_test_vecherko l_c_test_vecherko;
 
@@ -795,7 +823,7 @@ void Nist_tests_interface::linear_complexity_test_vecherko() const {
     std::cout << "----------------------------------------------------------------------" << std::endl;
 }
 
-void Nist_tests_interface::linear_complexity_test_lagunov() const {
+void Nist_tests_interface::linear_complexity_test_lagunov(int param_N) const {
     std::cout << "----------------------------------------------------------------------" << std::endl;
     Linear_complexity_test_lagunov l_c_t_test_lagunov;
 
@@ -807,7 +835,7 @@ void Nist_tests_interface::linear_complexity_test_lagunov() const {
     printf("Time spent on read(seconds): %.8f\n", duration_read);
 
     t1 = std::chrono::high_resolution_clock::now();
-    auto p_value = l_c_t_test_lagunov.run_test();
+    auto p_value = l_c_t_test_lagunov.run_test(param_N);
     t2 = std::chrono::high_resolution_clock::now();
     
     auto duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
@@ -822,9 +850,9 @@ void Nist_tests_interface::linear_complexity_test_lagunov() const {
     std::cout << "----------------------------------------------------------------------" << std::endl;
 }
 
-void Nist_tests_interface::run_all_linear_complexity_test() const {
-    linear_complexity_test_vecherko();
-    linear_complexity_test_lagunov();
+void Nist_tests_interface::run_all_linear_complexity_test(int param_N) const {
+    linear_complexity_test_vecherko(param_N);
+    linear_complexity_test_lagunov(param_N);
 
     print_statistic();
 }
@@ -833,38 +861,45 @@ void Nist_tests_interface::run_all_linear_complexity_test() const {
 
 void Nist_tests_interface::started_instructions_approximate_entropy_test() const {
     int number_of_approximate_entropy_test = 0;
+    int param_m = 4, input_param_value;
+
     std::cout << " W E L C O M E  TO  A L L  A P P R O X I M A T E  E N T R O P Y  T E S T " << std::endl;
     std::cout << "_________________________________________________________________________\n" << std::endl;
     std::cout << "[01] Approximate entropy test Grudinsky\n" << std::endl;
     std::cout << "Enter test implementation number or 0 for run all - " << std::endl;
     std::cin >> number_of_approximate_entropy_test;
+    std::cout << "Enter param_m for the test or 0 for devault (default m = 4) -" << std::endl;
+    std::cin >> input_param_value;
+
+    if (input_param_value != 0)
+        param_m = input_param_value;
 
     if (number_of_approximate_entropy_test == 0)
-        run_all_approximate_entropy_test();
+        run_all_approximate_entropy_test(param_m);
     else if (number_of_approximate_entropy_test < 1 && number_of_approximate_entropy_test > 1) {
         std::cerr << "Incorrect number of test, try again" << std::endl;
         started_instructions_approximate_entropy_test();
     }
     
     switch(number_of_approximate_entropy_test) {
-        case 1: approximate_entropy_test_grudinsky();
+        case 1: approximate_entropy_test_grudinsky(param_m);
                 break;
     }
 }
 
-void Nist_tests_interface::approximate_entropy_test_grudinsky() const {
+void Nist_tests_interface::approximate_entropy_test_grudinsky(int param_m) const {
     std::cout << "----------------------------------------------------------------------" << std::endl;
     Approximate_entropy_test_grudinsky appr_entr_test_grudinsky;
 
     auto t1 = std::chrono::high_resolution_clock::now();
-    appr_entr_test_grudinsky.read(file_name);
+    appr_entr_test_grudinsky.read(file_name, param_m);
     auto t2 = std::chrono::high_resolution_clock::now();
 
     auto duration_read = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
     printf("Time spent on read(seconds): %.8f\n", duration_read);
 
     t1 = std::chrono::high_resolution_clock::now();
-    auto p_value = appr_entr_test_grudinsky.run_test();
+    auto p_value = appr_entr_test_grudinsky.run_test(param_m);
     t2 = std::chrono::high_resolution_clock::now();
 
     auto duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
@@ -879,8 +914,8 @@ void Nist_tests_interface::approximate_entropy_test_grudinsky() const {
     std::cout << "----------------------------------------------------------------------" << std::endl;
 }
 
-void Nist_tests_interface::run_all_approximate_entropy_test() const {
-    approximate_entropy_test_grudinsky();
+void Nist_tests_interface::run_all_approximate_entropy_test(int param_m) const {
+    approximate_entropy_test_grudinsky(param_m);
 
     print_statistic();
 }

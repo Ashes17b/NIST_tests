@@ -25,12 +25,12 @@ namespace linear_complexity_test {
         f.close();
     }
 
-    double Linear_complexity_test_lagunov::run_test() const {
+    double Linear_complexity_test_lagunov::run_test(int param_m) const {
         std::cout << "Started performing linear_complexity_test Lagunov" << std::endl;
         assert(!_buffer.empty());
 
         std::vector<int> l;
-        int M = 4000;
+        int M = param_m;
         int N = _buffer.size() / M;
         for (int i = 0; i < N; i++) {
             std::vector<int8_t> block;

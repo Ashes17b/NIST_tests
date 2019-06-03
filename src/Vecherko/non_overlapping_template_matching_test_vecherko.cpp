@@ -25,11 +25,9 @@ namespace non_overlapping_template_matching_test {
             for (unsigned char mask = 128; mask > 0; mask >>= 1)
                 _buffer.push_back(byte_sequence[i] & mask);
 
-        _pattern.resize(9);
-        _pattern.back() = true;
     }
 
-    long double Non_overlapping_template_matching_test_vecherko::run_test(std::size_t number_of_blocks /* = 64 */) const {
+    long double Non_overlapping_template_matching_test_vecherko::run_test(std::size_t number_of_blocks /* = 16 */, std::string _pattern /*= "000000001"  */) const {
         std::cout << "Started performing non_overlapping_template_matching_test Vecherko" << std::endl;
         assert(!_buffer.empty());
         assert(!_pattern.empty());

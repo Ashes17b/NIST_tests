@@ -16,9 +16,9 @@ namespace serial_test {
         Serial_test_zakrevsky& operator=(Serial_test_zakrevsky &&serial_test_zakrevsky) = default;
         ~Serial_test_zakrevsky() = default;
 
-        void read(std::string filename = "") override;
+        void read(std::string filename = "", int param_m = 2) override;
 
-        std::pair<double, double> run_test() const override;
+        std::pair<double, double> run_test(int param_m = 2) const override;
 
     private:
         void counter(int m, int* temp, int n, int w) const;
@@ -26,7 +26,6 @@ namespace serial_test {
 
         bytes _buffer;
         int numbers_of_bits;
-        int param_m = 2;
     };  
 
 } //namespace serial_test

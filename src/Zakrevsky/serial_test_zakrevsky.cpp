@@ -3,7 +3,7 @@
 
 namespace serial_test {
 
-    void Serial_test_zakrevsky::read(std::string filename) {
+    void Serial_test_zakrevsky::read(std::string filename, int param_m) {
         if (filename.empty())
             std::cerr << "Filename is undefined" << std::endl;
         else
@@ -31,7 +31,7 @@ namespace serial_test {
         numbers_of_bits = n * 8;
     }
 
-    std::pair<double, double> Serial_test_zakrevsky::run_test() const {
+    std::pair<double, double> Serial_test_zakrevsky::run_test(int param_m) const {
         std::cout << "Started performing serial_test Zakrevsky" << std::endl;
         int n = numbers_of_bits;
         int r = param_m;

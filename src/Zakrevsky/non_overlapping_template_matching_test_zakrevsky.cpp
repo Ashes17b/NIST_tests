@@ -29,13 +29,14 @@ namespace non_overlapping_template_matching_test {
         f.close();
     }
 
-    long double Non_overlapping_template_matching_test_zakrevsky::run_test(std::size_t number_of_blocks /* = 64 */) const {
+    long double Non_overlapping_template_matching_test_zakrevsky::run_test(std::size_t number_of_blocks /* = 16 */, std::string _pattern /* = "000000001"*/) const {
         std::cout << "Started performing non_overlapping_template_matching_test Zakrevsky" << std::endl;
         assert(!_buffer.empty());
-        int M = (int)(0.1*size);
-        int N = floor((double)size/M);
+        int N = number_of_blocks;  // floor((double)size/M);
+        int M = (int)(size / N);
+
         int * temp = new int[m];
-        init(temp,m);
+        init(temp,m, _pattern);
         long long* counters = new long long[N];
         for (int i = 0; i < N; i++) {
             counters[i] = counter(i, (int)M / 8, temp);
@@ -92,9 +93,9 @@ namespace non_overlapping_template_matching_test {
     }
 
 
-    void Non_overlapping_template_matching_test_zakrevsky::init(int* mas, int m) const {
+    void Non_overlapping_template_matching_test_zakrevsky::init(int* mas, int m, std::string _pattern) const {
         for (int i = 0; i < m; i++) {
-            if (temoString[i] == '0')
+            if (_pattern[i] == '0')
                 mas[i] = 0;
             else
                 mas[i] = 1;

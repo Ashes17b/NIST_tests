@@ -19,7 +19,7 @@ namespace linear_complexity_test {
 
         void read(std::string filename = "") override;
 
-        double run_test() const override;
+        double run_test(int param_m = 50) const override;
 
     private:
         
