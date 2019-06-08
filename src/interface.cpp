@@ -432,7 +432,7 @@ void Nist_tests_interface::started_instructions_non_overlapping_template_matchin
 
     std::cout << " W E L C O M E  TO  N O N  O V E R L A P P I N G  T E M P L A T E  M A T C H I N G  T E S T " << std::endl;
     std::cout << "____________________________________________________________________________________________\n" << std::endl;
-    std::cout << "[01] Non overlapping template matching test Vecherko  [02] Non overlapping template matching test Lagunov" << std::endl;
+    std::cout << "[01] Non overlapping template matching test Evil_genius  [02] Non overlapping template matching test Lagunov" << std::endl;
     std::cout << "[03] Non overlapping template matching test Zakrevsky\n" << std::endl;
     std::cout << "Enter test implementation number or 0 for run all - " << std::endl;
     std::cin >> number_of_non_overlapping_template_matching_test;
@@ -456,7 +456,7 @@ void Nist_tests_interface::started_instructions_non_overlapping_template_matchin
     }
     
     switch(number_of_non_overlapping_template_matching_test) {
-        case 1: non_overlapping_template_matching_test_vecherko(param_N, pattern);
+        case 1: non_overlapping_template_matching_test_evil_genius(param_N, pattern);
                 break;
         case 2: non_overlapping_template_matching_test_lagunov(param_N, pattern);
                 break;
@@ -465,19 +465,19 @@ void Nist_tests_interface::started_instructions_non_overlapping_template_matchin
     }
 }
 
-void Nist_tests_interface::non_overlapping_template_matching_test_vecherko(int param_N, std::string pattern) const {
+void Nist_tests_interface::non_overlapping_template_matching_test_evil_genius(int param_N, std::string pattern) const {
     std::cout << "----------------------------------------------------------------------" << std::endl;
-    Non_overlapping_template_matching_test_vecherko n_o_t_m_test_vecherko;
+    Non_overlapping_template_matching_test_evil_genius n_o_t_m_test_evil_genius;
 
     auto t1 = std::chrono::high_resolution_clock::now();
-    n_o_t_m_test_vecherko.read(file_name);
+    n_o_t_m_test_evil_genius.read(file_name);
     auto t2 = std::chrono::high_resolution_clock::now();
 
     auto duration_read = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
     printf("Time spent on read(seconds): %.8f\n", duration_read);
 
     t1 = std::chrono::high_resolution_clock::now();
-    auto p_value = n_o_t_m_test_vecherko.run_test(param_N, pattern);
+    auto p_value = n_o_t_m_test_evil_genius.run_test(param_N, pattern);
     t2 = std::chrono::high_resolution_clock::now();
 
     auto duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
@@ -486,9 +486,9 @@ void Nist_tests_interface::non_overlapping_template_matching_test_vecherko(int p
     printf("Time spent on everything(seconds): %.8f\n", duration_read + duration_task);
 
     printf("\nP-value non_overlapping_template_matching_test: %.8Lf\n", p_value);
-    test_read_stat.insert({duration_read, "Vecherko"});
-    test_task_stat.insert({duration_task, "Vecherko"});
-    test_stat.insert({duration_read + duration_task, "Vecherko"});
+    test_read_stat.insert({duration_read, "Evil_genius"});
+    test_task_stat.insert({duration_task, "Evil_genius"});
+    test_stat.insert({duration_read + duration_task, "Evil_genius"});
     std::cout << "----------------------------------------------------------------------" << std::endl;
 }
 
@@ -547,7 +547,7 @@ void Nist_tests_interface::non_overlapping_template_matching_test_zakrevsky(int 
 }
 
 void Nist_tests_interface::run_all_non_overlapping_template_matching_test(int param_N, std::string pattern) const {
-    non_overlapping_template_matching_test_vecherko(param_N, pattern);
+    non_overlapping_template_matching_test_evil_genius(param_N, pattern);
     non_overlapping_template_matching_test_lagunov(param_N, pattern);
     non_overlapping_template_matching_test_zakrevsky(param_N, pattern);
 
@@ -653,7 +653,7 @@ void Nist_tests_interface::started_instructions_spectral_test() const {
     int number_of_spectral_test = 0;
     std::cout << " W E L C O M E  TO  S P E C T R A L  T E S T " << std::endl;
     std::cout << "_____________________________________________\n" << std::endl;
-    std::cout << "[01] Spectral test Lisai  [02] Spectral test Vecherko" << std::endl;
+    std::cout << "[01] Spectral test Lisai  [02] Spectral test Evil_genius" << std::endl;
     std::cout << "[03] Spectral test Grudinsky\n" << std::endl;
     std::cout << "Enter test implementation number or 0 for run all - " << std::endl;
     std::cin >> number_of_spectral_test;
@@ -668,7 +668,7 @@ void Nist_tests_interface::started_instructions_spectral_test() const {
     switch(number_of_spectral_test) {
         case 1: spectral_test_lisai();
                 break;
-        case 2: spectral_test_vecherko();
+        case 2: spectral_test_evil_genius();
                 break;
         case 3: spectral_test_grudinsky();
                 break;
@@ -702,19 +702,19 @@ void Nist_tests_interface::spectral_test_lisai() const {
     std::cout << "----------------------------------------------------------------------" << std::endl;
 }
 
-void Nist_tests_interface::spectral_test_vecherko() const {
+void Nist_tests_interface::spectral_test_evil_genius() const {
     std::cout << "----------------------------------------------------------------------" << std::endl;
-    Spectral_test_vecherko spectral_test_vecherko;
+    Spectral_test_evil_genius spectral_test_evil_genius;
 
     auto t1 = std::chrono::high_resolution_clock::now();
-    spectral_test_vecherko.read(file_name);
+    spectral_test_evil_genius.read(file_name);
     auto t2 = std::chrono::high_resolution_clock::now();
 
     auto duration_read = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
     printf("Time spent on read(seconds): %.8f\n", duration_read);
 
     t1 = std::chrono::high_resolution_clock::now();
-    auto p_value = spectral_test_vecherko.run_test();
+    auto p_value = spectral_test_evil_genius.run_test();
     t2 = std::chrono::high_resolution_clock::now();
     
     auto duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
@@ -723,9 +723,9 @@ void Nist_tests_interface::spectral_test_vecherko() const {
     printf("Time spent on everything(seconds): %.8f\n", duration_read + duration_task);
 
     printf("\nP-value spectral_test: %.8f\n", p_value);
-    test_read_stat.insert({duration_read, "Vecherko"});
-    test_task_stat.insert({duration_task, "Vecherko"});
-    test_stat.insert({duration_read + duration_task, "Vecherko"});
+    test_read_stat.insert({duration_read, "Evil_genius"});
+    test_task_stat.insert({duration_task, "Evil_genius"});
+    test_stat.insert({duration_read + duration_task, "Evil_genius"});
     std::cout << "----------------------------------------------------------------------" << std::endl;
 }
 
@@ -758,7 +758,7 @@ void Nist_tests_interface::spectral_test_grudinsky() const {
 
 void Nist_tests_interface::run_all_spectral_test() const {
     spectral_test_lisai();
-    spectral_test_vecherko();
+    spectral_test_evil_genius();
     spectral_test_grudinsky();
 
     print_statistic();
@@ -772,7 +772,7 @@ void Nist_tests_interface::started_instructions_linear_complexity_test() const {
 
     std::cout << " W E L C O M E  TO  L I N E A R  C O M P L E X I T Y  T E S T " << std::endl;
     std::cout << "______________________________________________________________\n" << std::endl;
-    std::cout << "[01] Linear complexity test Vecherko  [02] Linear complexity test Lagunov\n" << std::endl;
+    std::cout << "[01] Linear complexity test Evil_genius  [02] Linear complexity test Lagunov\n" << std::endl;
     std::cout << "Enter test implementation number or 0 for run all - " << std::endl;
     std::cin >> number_of_linear_complexity_test;
     std::cout << "Enter N for the test: or 0 for devault (default m = 50) -" << std::endl;
@@ -789,26 +789,26 @@ void Nist_tests_interface::started_instructions_linear_complexity_test() const {
     }
     
     switch(number_of_linear_complexity_test) {
-        case 1: linear_complexity_test_vecherko(param_N);
+        case 1: linear_complexity_test_evil_genius(param_N);
                 break;
         case 2: linear_complexity_test_lagunov(param_N);
                 break;
     }
 }
 
-void Nist_tests_interface::linear_complexity_test_vecherko(int param_N) const {
+void Nist_tests_interface::linear_complexity_test_evil_genius(int param_N) const {
     std::cout << "----------------------------------------------------------------------" << std::endl;
-    Linear_complexity_test_vecherko l_c_test_vecherko;
+    Linear_complexity_test_evil_genius l_c_test_evil_genius;
 
     auto t1 = std::chrono::high_resolution_clock::now();
-    l_c_test_vecherko.read(file_name);
+    l_c_test_evil_genius.read(file_name);
     auto t2 = std::chrono::high_resolution_clock::now();
 
     auto duration_read = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
     printf("Time spent on read(seconds): %.8f\n", duration_read);
 
     t1 = std::chrono::high_resolution_clock::now();
-    auto p_value = l_c_test_vecherko.run_test();
+    auto p_value = l_c_test_evil_genius.run_test();
     t2 = std::chrono::high_resolution_clock::now();
     
     auto duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
@@ -817,9 +817,9 @@ void Nist_tests_interface::linear_complexity_test_vecherko(int param_N) const {
     printf("Time spent on everything(seconds): %.8f\n", duration_read + duration_task);
 
     printf("\nP-value linear_complexity_test: %.8f\n", p_value);
-    test_read_stat.insert({duration_read, "Vecherko"});
-    test_task_stat.insert({duration_task, "Vecherko"});
-    test_stat.insert({duration_read + duration_task, "Vecherko"});
+    test_read_stat.insert({duration_read, "Evil_genius"});
+    test_task_stat.insert({duration_task, "Evil_genius"});
+    test_stat.insert({duration_read + duration_task, "Evil_genius"});
     std::cout << "----------------------------------------------------------------------" << std::endl;
 }
 
@@ -851,7 +851,7 @@ void Nist_tests_interface::linear_complexity_test_lagunov(int param_N) const {
 }
 
 void Nist_tests_interface::run_all_linear_complexity_test(int param_N) const {
-    linear_complexity_test_vecherko(param_N);
+    linear_complexity_test_evil_genius(param_N);
     linear_complexity_test_lagunov(param_N);
 
     print_statistic();
@@ -926,7 +926,7 @@ void Nist_tests_interface::started_instructions_binary_matrix_rank_test() const 
     int number_of_binary_matrix_rank_test = 0;
     std::cout << " W E L C O M E  TO  B I N A R Y  M A T R I X  R A N K  T E S T " << std::endl;
     std::cout << "_______________________________________________________________\n" << std::endl;
-    std::cout << "[01] Binary matrix rank test Vecherko\n" << std::endl;
+    std::cout << "[01] Binary matrix rank test Evil_genius\n" << std::endl;
     std::cout << "Enter test implementation number or 0 for run all - " << std::endl;
     std::cin >> number_of_binary_matrix_rank_test;
 
@@ -938,24 +938,24 @@ void Nist_tests_interface::started_instructions_binary_matrix_rank_test() const 
     }
     
     switch(number_of_binary_matrix_rank_test) {
-        case 1: binary_matrix_rank_test_vecherko();
+        case 1: binary_matrix_rank_test_evil_genius();
                 break;
     }
 }
 
-void Nist_tests_interface::binary_matrix_rank_test_vecherko() const {
+void Nist_tests_interface::binary_matrix_rank_test_evil_genius() const {
     std::cout << "----------------------------------------------------------------------" << std::endl;
-    Binary_matrix_rank_test_vecherko b_m_r_test_vecherko;
+    Binary_matrix_rank_test_evil_genius b_m_r_test_evil_genius;
 
     auto t1 = std::chrono::high_resolution_clock::now();
-    b_m_r_test_vecherko.read(file_name);
+    b_m_r_test_evil_genius.read(file_name);
     auto t2 = std::chrono::high_resolution_clock::now();
 
     auto duration_read = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
     printf("Time spent on read(seconds): %.8f\n", duration_read);
 
     t1 = std::chrono::high_resolution_clock::now();
-    auto p_value = b_m_r_test_vecherko.run_test();
+    auto p_value = b_m_r_test_evil_genius.run_test();
     t2 = std::chrono::high_resolution_clock::now();
     
     auto duration_task = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() * 1e-6;
@@ -964,14 +964,14 @@ void Nist_tests_interface::binary_matrix_rank_test_vecherko() const {
     printf("Time spent on everything(seconds): %.8f\n", duration_read + duration_task);
 
     printf("\nP-value binary_matrix_rank_test: %.8f\n", p_value);
-    test_read_stat.insert({duration_read, "Vecherko"});
-    test_task_stat.insert({duration_task, "Vecherko"});
-    test_stat.insert({duration_read + duration_task, "Vecherko"});
+    test_read_stat.insert({duration_read, "Evil_genius"});
+    test_task_stat.insert({duration_task, "Evil_genius"});
+    test_stat.insert({duration_read + duration_task, "Evil_genius"});
     std::cout << "----------------------------------------------------------------------" << std::endl;
 }
 
 void Nist_tests_interface::run_all_binary_matrix_rank_test() const {
-    binary_matrix_rank_test_vecherko();
+    binary_matrix_rank_test_evil_genius();
 
     print_statistic();
 }

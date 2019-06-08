@@ -1,12 +1,12 @@
-#include "../libraries/spectral_test_vecherko.hpp"
+#include "../libraries/spectral_test_evil_genius.hpp"
 
 namespace spectral_test {
 
-    void Spectral_test_vecherko::read(std::string filename /* = "" */) {
+    void Spectral_test_evil_genius::read(std::string filename /* = "" */) {
         if (filename.empty())
             std::cerr << "Filename is undefined" << std::endl;
         else
-            std::cout << "Read from(Spectral_test Vecherko) " << filename << std::endl;
+            std::cout << "Read from(Spectral_test Evil_genius) " << filename << std::endl;
 
         std::ifstream f(filename, std::ios::binary | std::ios::in);
 
@@ -39,8 +39,8 @@ namespace spectral_test {
         f.close();
     }
 
-    double Spectral_test_vecherko::run_test() {
-        std::cout << "Started performing spectral_test Vecherko" << std::endl;
+    double Spectral_test_evil_genius::run_test() {
+        std::cout << "Started performing spectral_test Evil_genius" << std::endl;
         assert(!_buffer.empty());
 
         for(int i = 0; i < _buffer.size(); ++i) {
@@ -68,20 +68,20 @@ namespace spectral_test {
         return p_value;
     }
 
-    std::vector<base> Spectral_test_vecherko::runFFT() {
+    std::vector<base> Spectral_test_evil_genius::runFFT() {
         std::vector<base> fa(_buffer.begin(), _buffer.end());
         fft(fa, false);
         return fa;
     }
 
-    std::vector<double> Spectral_test_vecherko::getModuls(const std::vector<base> &v) {
+    std::vector<double> Spectral_test_evil_genius::getModuls(const std::vector<base> &v) {
         std::vector<double> ans(v.size());
         for(int i = 0; i < v.size(); ++i)
             ans[i] = abs(v[i]);
         return ans;
     }
 
-    double Spectral_test_vecherko::getN1(const std::vector<double> &v, double T) {
+    double Spectral_test_evil_genius::getN1(const std::vector<double> &v, double T) {
         double ans = 0;
         for(int i = 0; i < v.size(); ++i)
             if(v[i] < T)
@@ -89,7 +89,7 @@ namespace spectral_test {
         return ans;
     }
 
-    void Spectral_test_vecherko::fft(std::vector<base> & a, bool invert) {
+    void Spectral_test_evil_genius::fft(std::vector<base> & a, bool invert) {
         int n = (int) a.size();
         if (n <= 1)  return;
 
@@ -116,13 +116,13 @@ namespace spectral_test {
             a[n-1] = a0[n/2] + w * a1[n/2];;
     }
 
-    void Spectral_test_vecherko::replaceZeros(std::vector<int> &v) {
+    void Spectral_test_evil_genius::replaceZeros(std::vector<int> &v) {
         for(int i = 0; i < v.size(); ++i)
             if(v[i] == 0)
                 v[i] = -1;
     }
 
-    std::size_t Spectral_test_vecherko::get_size_file(std::string filename) const {
+    std::size_t Spectral_test_evil_genius::get_size_file(std::string filename) const {
         std::ifstream f(filename, std::ios::binary | std::ios::in | std::ifstream::ate);
         return f.tellg();
     }

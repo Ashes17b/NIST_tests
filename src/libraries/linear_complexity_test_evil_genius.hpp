@@ -18,15 +18,15 @@ namespace linear_complexity_test {
         }
     };
 
-    class Linear_complexity_test_vecherko : public Linear_complexity_test
+    class Linear_complexity_test_evil_genius : public Linear_complexity_test
     {
     public:
-        Linear_complexity_test_vecherko() = default;
-        Linear_complexity_test_vecherko(const Linear_complexity_test_vecherko &Linear_complexity_test_vecherko) = default;
-        Linear_complexity_test_vecherko(Linear_complexity_test_vecherko &&Linear_complexity_test_vecherko) = default;
-        Linear_complexity_test_vecherko &operator=(const Linear_complexity_test_vecherko &Linear_complexity_test_vecherko) = default;
-        Linear_complexity_test_vecherko &operator=(Linear_complexity_test_vecherko &&Linear_complexity_test_vecherko) = default;
-        ~Linear_complexity_test_vecherko() = default;
+        Linear_complexity_test_evil_genius() = default;
+        Linear_complexity_test_evil_genius(const Linear_complexity_test_evil_genius &Linear_complexity_test_evil_genius) = default;
+        Linear_complexity_test_evil_genius(Linear_complexity_test_evil_genius &&Linear_complexity_test_evil_genius) = default;
+        Linear_complexity_test_evil_genius &operator=(const Linear_complexity_test_evil_genius &Linear_complexity_test_evil_genius) = default;
+        Linear_complexity_test_evil_genius &operator=(Linear_complexity_test_evil_genius &&Linear_complexity_test_evil_genius) = default;
+        ~Linear_complexity_test_evil_genius() = default;
 
         void read(std::string filename = "") override;
 

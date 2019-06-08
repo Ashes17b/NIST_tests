@@ -1,12 +1,12 @@
-#include "../libraries/non_overlapping_template_matching_test_vecherko.hpp"
+#include "../libraries/non_overlapping_template_matching_test_evil_genius.hpp"
 
 namespace non_overlapping_template_matching_test {
 
-    void Non_overlapping_template_matching_test_vecherko::read(std::string filename /* = "" */) {
+    void Non_overlapping_template_matching_test_evil_genius::read(std::string filename /* = "" */) {
         if (filename.empty())
             std::cerr << "Filename is undefined" << std::endl;
         else
-            std::cout << "Read from(Non_overlapping_template_matching_test Vecherko) " << filename << std::endl;
+            std::cout << "Read from(Non_overlapping_template_matching_test Evil_genius) " << filename << std::endl;
 
         std::ostringstream stream;
         std::ifstream f(filename, std::ios::binary | std::ios::in);
@@ -27,8 +27,8 @@ namespace non_overlapping_template_matching_test {
 
     }
 
-    long double Non_overlapping_template_matching_test_vecherko::run_test(std::size_t number_of_blocks /* = 16 */, std::string _pattern /*= "000000001"  */) const {
-        std::cout << "Started performing non_overlapping_template_matching_test Vecherko" << std::endl;
+    long double Non_overlapping_template_matching_test_evil_genius::run_test(std::size_t number_of_blocks /* = 16 */, std::string _pattern /*= "000000001"  */) const {
+        std::cout << "Started performing non_overlapping_template_matching_test Evil_genius" << std::endl;
         assert(!_buffer.empty());
         assert(!_pattern.empty());
 
@@ -37,7 +37,7 @@ namespace non_overlapping_template_matching_test {
         long double mean = (block_size - _pattern.size() + 1.l) / (1 << _pattern.size());
         long double variance = block_size * (1.l / (1 << _pattern.size()) - ((_pattern.size() << 1) - 1.l) / (1 << (_pattern.size() << 1)));
         
-        bytes_vecherko prefix;
+        bytes_evil_genius prefix;
         prefix_function(prefix);
 
         for (size_t from = 0, to = block_size; to <= _buffer.size(); to += block_size) {
@@ -52,7 +52,7 @@ namespace non_overlapping_template_matching_test {
         return upper_incomplete_gamma(number_of_blocks, chi2 / 2.l);
     }
 
-    void Non_overlapping_template_matching_test_vecherko::prefix_function(bytes_vecherko &prefix) const {
+    void Non_overlapping_template_matching_test_evil_genius::prefix_function(bytes_evil_genius &prefix) const {
         prefix.assign(_pattern.size(), 0);
 
         for (size_t i = 1; i < prefix.size(); ++i) {
@@ -67,7 +67,7 @@ namespace non_overlapping_template_matching_test {
         }
     }
 
-    std::size_t Non_overlapping_template_matching_test_vecherko::find_first(std::size_t from, std::size_t to, bytes_vecherko &prefix) const {
+    std::size_t Non_overlapping_template_matching_test_evil_genius::find_first(std::size_t from, std::size_t to, bytes_evil_genius &prefix) const {
         for (size_t matched_values = 0; from + _pattern.size() <= to;) {
         
             while (matched_values < _pattern.size() && _buffer[from + matched_values] == _pattern[matched_values]) 
@@ -86,7 +86,7 @@ namespace non_overlapping_template_matching_test {
         return to;
     }
 
-    long double Non_overlapping_template_matching_test_vecherko::upper_incomplete_gamma(unsigned s, long double x) const {
+    long double Non_overlapping_template_matching_test_evil_genius::upper_incomplete_gamma(unsigned s, long double x) const {
         unsigned s0;
         long double dividend, divisor;
         long double exp_x = exp(-x);
@@ -107,9 +107,9 @@ namespace non_overlapping_template_matching_test {
         return dividend / divisor;
     }
 
-    std::size_t Non_overlapping_template_matching_test_vecherko::get_size_file(std::string filename) const {
+    std::size_t Non_overlapping_template_matching_test_evil_genius::get_size_file(std::string filename) const {
         std::ifstream f(filename, std::ios::binary | std::ios::in | std::ifstream::ate);
         return f.tellg();
     }
 
-} //namespace non_overlapping_template_matching_test_vecherko
+} //namespace non_overlapping_template_matching_test_evil_genius

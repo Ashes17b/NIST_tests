@@ -55,7 +55,7 @@ private:
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     void started_instructions_non_overlapping_template_matching_test() const;
-    void non_overlapping_template_matching_test_vecherko(int param_M = 16, std::string pattern = "000000001") const;
+    void non_overlapping_template_matching_test_evil_genius(int param_M = 16, std::string pattern = "000000001") const;
     void non_overlapping_template_matching_test_lagunov(int param_M = 16, std::string pattern = "000000001") const;
     void non_overlapping_template_matching_test_zakrevsky(int param_M = 16, std::string pattern = "000000001") const;
     void run_all_non_overlapping_template_matching_test(int param_M = 16, std::string pattern = "000000001") const; // << 5
@@ -73,7 +73,7 @@ private:
     ////////////////////////////////////////////////////////////////////////////////////////////////
     void started_instructions_spectral_test() const;
     void spectral_test_lisai() const;
-    void spectral_test_vecherko() const;
+    void spectral_test_evil_genius() const;
     void spectral_test_grudinsky() const;
     void run_all_spectral_test() const; // << 7
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -81,7 +81,7 @@ private:
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     void started_instructions_linear_complexity_test() const;
-    void linear_complexity_test_vecherko(int param_N = 50) const;
+    void linear_complexity_test_evil_genius(int param_N = 50) const;
     void linear_complexity_test_lagunov(int param_N = 50) const;
     void run_all_linear_complexity_test(int param_N = 50) const; // << 8
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -96,7 +96,7 @@ private:
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     void started_instructions_binary_matrix_rank_test() const;
-    void binary_matrix_rank_test_vecherko() const;
+    void binary_matrix_rank_test_evil_genius() const;
     void run_all_binary_matrix_rank_test() const; // << 10
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
