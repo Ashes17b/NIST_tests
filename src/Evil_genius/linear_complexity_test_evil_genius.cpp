@@ -1,4 +1,4 @@
-#include "../libraries/linear_complexity_test_vecherko.hpp"
+#include "../libraries/linear_complexity_test_evil_genius.hpp"
 
 namespace linear_complexity_test {
 
@@ -6,11 +6,11 @@ namespace linear_complexity_test {
     const auto M = 50;
     const auto K = 6;
 
-    void Linear_complexity_test_vecherko::read(std::string filename /* = "" */) {
+    void Linear_complexity_test_evil_genius::read(std::string filename /* = "" */) {
         if (filename.empty())
             std::cerr << "Filename is undefined" << std::endl;
         else
-            std::cout << "Read from(Linear_complexity_test_vecherko Vecherko) " << filename << std::endl;
+            std::cout << "Read from(Linear_complexity_test_evil_genius Evil_genius) " << filename << std::endl;
 
         std::ifstream f(filename, std::ios::binary | std::ios::ate);
 
@@ -26,11 +26,12 @@ namespace linear_complexity_test {
         _buffer = new bytes((byte*)buffer, pos);
     }
 
-    double Linear_complexity_test_vecherko::run_test() const {
-        std::cout << "Started performing linear_complexity_test Vecherko" << std::endl;
+    double Linear_complexity_test_evil_genius::run_test(int param_m) const {
+        std::cout << "Started performing linear_complexity_test Evil_genius" << std::endl;
         auto seq = _buffer->seq;
         auto len = _buffer->len;
 
+        int M = param_m;
         int n = 8 * len;
         int N = n/M;
         int v[7] = {0, 0, 0, 0, 0, 0, 0};
@@ -61,20 +62,20 @@ namespace linear_complexity_test {
         return igamc2(K, chi2/2.0);
     }
 
-    std::size_t Linear_complexity_test_vecherko::get_size_file(std::string filename) const {
+    std::size_t Linear_complexity_test_evil_genius::get_size_file(std::string filename) const {
         std::ifstream f(filename, std::ios::binary | std::ios::in | std::ifstream::ate);
         return f.tellg();
     }
 
-    double Linear_complexity_test_vecherko::theoretical_mean(int m) const {
+    double Linear_complexity_test_evil_genius::theoretical_mean(int m) const {
         return m/2.0 + (9.0 + neg_one_pow(m+1))/36.0 - (m/3.0 + 2.0/9.0)/pow(2.0L, (long double)m);
     }
 
-    int Linear_complexity_test_vecherko::neg_one_pow(int n) const {
+    int Linear_complexity_test_evil_genius::neg_one_pow(int n) const {
         return n%2 == 0 ? 1 : -1;
     }
 
-    int Linear_complexity_test_vecherko::linear_complexity(byte* seq, int offset, int N) const {
+    int Linear_complexity_test_evil_genius::linear_complexity(byte* seq, int offset, int N) const {
         //int max_shift_size = (N+7)/8;
         bool* b = zero_arr<bool>(N);
         bool* c = zero_arr<bool>(N);
@@ -131,7 +132,7 @@ namespace linear_complexity_test {
         return l;
     }
 
-    int Linear_complexity_test_vecherko::get_v_index(double t) const {
+    int Linear_complexity_test_evil_genius::get_v_index(double t) const {
         if (t <= -2.5) {
             return 0;
         } else if (t <= -1.5) {
@@ -149,7 +150,7 @@ namespace linear_complexity_test {
         }
     }
 
-    double Linear_complexity_test_vecherko::igamc(unsigned int s, double x) const {
+    double Linear_complexity_test_evil_genius::igamc(unsigned int s, double x) const {
         double sum = 1;
         double element = 1;
         for(int k=1; k<s; k++) {
@@ -160,7 +161,7 @@ namespace linear_complexity_test {
         return exp(-x) * sum;
     }
 
-    double Linear_complexity_test_vecherko::gamma(unsigned int s2) const {
+    double Linear_complexity_test_evil_genius::gamma(unsigned int s2) const {
         double g = 1;
         double s = s2 / 2.0;
         while (s > 1) {
@@ -174,7 +175,7 @@ namespace linear_complexity_test {
         }
     }
 
-    double Linear_complexity_test_vecherko::igamc2(unsigned int s2, double x) const {
+    double Linear_complexity_test_evil_genius::igamc2(unsigned int s2, double x) const {
         if(s2 % 2 == 0) {
             return igamc(s2/2, x);
         } else {

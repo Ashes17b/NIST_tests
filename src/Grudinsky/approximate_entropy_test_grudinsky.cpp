@@ -3,11 +3,11 @@
 
 namespace approximate_entropy_test {
 
-    void Approximate_entropy_test_grudinsky::read(std::string filename) {
+    void Approximate_entropy_test_grudinsky::read(std::string filename, int param_m) {
         if (filename.empty())
             std::cerr << "Filename is undefined" << std::endl;
         else
-            std::cout << "Read from(Spectral_test Grudinsky) " << filename << std::endl;
+            std::cout << "Read from(Approximate_entropy_test Grudinsky) " << filename << std::endl;
 
         std::ifstream f(filename, std::ios::binary);
         numbers_of_bytes = get_size_file(filename);
@@ -23,8 +23,8 @@ namespace approximate_entropy_test {
             _buffer[n + i] = _buffer[i];
     }
 
-    double Approximate_entropy_test_grudinsky::run_test() {
-        std::cout << "Started performing spectral_test Grudinsky" << std::endl;
+    double Approximate_entropy_test_grudinsky::run_test(int param_m) {
+        std::cout << "Started performing approximate_entropy_test Grudinsky" << std::endl;
         int m = param_m;
         int v = pow(2, m);
         int n = numbers_of_bytes;

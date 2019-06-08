@@ -16,16 +16,15 @@ namespace serial_test {
         Serial_test_lisai& operator=(Serial_test_lisai &&serial_test_lisai) = default;
         ~Serial_test_lisai() = default;
 
-        void read(std::string filename = "") override;
+        void read(std::string filename = "", int param_m = 2) override;
 
-        std::pair<double, double> run_test() const override;
+        std::pair<double, double> run_test(int param_m = 2) const override;
 
     private:
         double psi2(bytes epsilon, int m, int n) const;
         std::size_t get_size_file(std::string filename) const;
                 
         bytes _buffer;
-        int param_m = 2;
     };  
 
 } //namespace serial_test

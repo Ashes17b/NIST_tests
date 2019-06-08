@@ -1,12 +1,12 @@
-#include "../libraries/binary_matrix_rank_test_vecherko.hpp"
+#include "../libraries/binary_matrix_rank_test_evil_genius.hpp"
 
 namespace binary_matrix_rank_test {
 
-    void Binary_matrix_rank_test_vecherko::read(std::string filename /* = "" */) {
+    void Binary_matrix_rank_test_evil_genius::read(std::string filename /* = "" */) {
         if (filename.empty())
             std::cerr << "Filename is undefined" << std::endl;
         else
-            std::cout << "Read from(Binary_matrix_rank_test Vecherko) " << filename << std::endl;
+            std::cout << "Read from(Binary_matrix_rank_test Evil_genius) " << filename << std::endl;
 
         std::ifstream f(filename, std::ios::binary | std::ios::in);
 
@@ -30,8 +30,8 @@ namespace binary_matrix_rank_test {
         f.close();
     }
 
-    double Binary_matrix_rank_test_vecherko::run_test(int M /* = 32 */, int Q /* = 32 */) const {
-        std::cout << "Started performing binary_matrix_rank_test Vecherko" << std::endl;
+    double Binary_matrix_rank_test_evil_genius::run_test(int M /* = 32 */, int Q /* = 32 */) const {
+        std::cout << "Started performing binary_matrix_rank_test Evil_genius" << std::endl;
         assert(!_buffer.empty());
 
         std::vector<std::vector<int> > bin_matrix(M, std::vector<int> (Q, 0));
@@ -59,7 +59,7 @@ namespace binary_matrix_rank_test {
         return p_value;
     }
 
-    int Binary_matrix_rank_test_vecherko::getMatrixRank(std::vector<std::vector<int> > &matrix, bool inv /* = false */) const {
+    int Binary_matrix_rank_test_evil_genius::getMatrixRank(std::vector<std::vector<int> > &matrix, bool inv /* = false */) const {
         int n = matrix.size();
         int m = matrix[0].size();
 
@@ -102,14 +102,14 @@ namespace binary_matrix_rank_test {
         return rnk;
     }
 
-    double Binary_matrix_rank_test_vecherko::hiSqCompute(int f_m, int f_m_1, int N) const {
+    double Binary_matrix_rank_test_evil_genius::hiSqCompute(int f_m, int f_m_1, int N) const {
         double ans = (f_m  - 0.2888*N)*(f_m  - 0.2888*N)/(0.2888*N);
         ans += (f_m_1  - 0.5776*N)*(f_m_1  - 0.5776*N)/(0.5776*N);
         ans += (N - f_m - f_m_1 - 0.1336*N)*(N - f_m - f_m_1 - 0.1336*N)/(0.1336*N);
         return ans;
     }
 
-    std::size_t Binary_matrix_rank_test_vecherko::get_size_file(std::string filename) const {
+    std::size_t Binary_matrix_rank_test_evil_genius::get_size_file(std::string filename) const {
         std::ifstream f(filename, std::ios::binary | std::ios::in | std::ifstream::ate);
         return f.tellg();
     }

@@ -15,9 +15,9 @@ namespace approximate_entropy_test {
 
         Approximate_entropy_test() = default;
 
-        virtual void read(std::string filename = "") = 0;
+        virtual void read(std::string filename = "", int param_m = 4) = 0;
 
-        virtual double run_test() = 0;
+        virtual double run_test(int param_m = 4) = 0;
 
         virtual ~Approximate_entropy_test() = default;
     };

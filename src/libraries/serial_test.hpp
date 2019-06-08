@@ -15,9 +15,9 @@ namespace serial_test {
 
         Serial_test() = default;
 
-        virtual void read(std::string filename = "") = 0;
+        virtual void read(std::string filename = "", int param_m = 2) = 0;
 
-        virtual std::pair<double, double> run_test() const = 0;
+        virtual std::pair<double, double> run_test(int param_m = 2) const = 0;
 
         virtual ~Serial_test() = default;
     };

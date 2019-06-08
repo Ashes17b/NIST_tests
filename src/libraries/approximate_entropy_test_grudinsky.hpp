@@ -15,9 +15,9 @@ namespace approximate_entropy_test {
         Approximate_entropy_test_grudinsky& operator=(Approximate_entropy_test_grudinsky &&approximate_entropy_test_grudinsky) = default;
         ~Approximate_entropy_test_grudinsky() = default;
 
-        void read(std::string filename = "") override;
+        void read(std::string filename = "", int param_m = 4) override;
 
-        double run_test() override;
+        double run_test(int param_m = 4) override;
 
     private:
         void dittt(int size);
@@ -26,6 +26,5 @@ namespace approximate_entropy_test {
         std::size_t get_size_file(std::string filename) const;
         // double f(double x, double a);
         int largest_pow(int n);
-        int param_m = 4;
     };
 } //namespace approximate_entropy_test

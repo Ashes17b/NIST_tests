@@ -17,7 +17,7 @@ namespace linear_complexity_test {
 
         virtual void read(std::string filename = "") = 0;
 
-        virtual double run_test() const = 0;
+        virtual double run_test(int param_m = 50) const = 0;
 
         virtual ~Linear_complexity_test() = default;
     };
